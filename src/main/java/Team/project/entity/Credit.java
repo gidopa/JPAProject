@@ -13,7 +13,9 @@ public class Credit { // 평균 학점
     @GeneratedValue
     @Column(name = "credit_id")
     private String id;
+
     @OneToOne(mappedBy = "credit")
     private Student student;
+
     private float credit; // 평균 학점
 }
