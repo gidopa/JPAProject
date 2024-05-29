@@ -16,7 +16,9 @@ public class Major {
     @GeneratedValue
     @Column(name = "major_id")
     private String id;
+
     private String name;
+
     @OneToMany(mappedBy = "major")
     private List<Professor> professors = new ArrayList<>();
 }

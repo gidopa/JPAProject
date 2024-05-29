@@ -25,6 +25,8 @@ public class Course {
     private List<Enroll> enrollments;  // 추가: Course와 Enroll의 관계*/
 
     private int credit; // 몇 학점 짜리 강의인지
+
+    @Enumerated(EnumType.STRING)
     private Category category; // 전공 / 교양
     @Embedded
     private SemesterInfo semesterInfo;

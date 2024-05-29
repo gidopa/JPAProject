@@ -16,9 +16,12 @@ public class Student {
     @GeneratedValue
     @Column(name = "student_id")
     private Long id;
+
     @Column(unique = true)
     private Long hakbun;
     private String name;
+
+    private Long password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id")
@@ -37,5 +40,6 @@ public class Student {
     @Embedded
     private SemesterInfo semesterInfo;
 
+    @Enumerated(EnumType.STRING)
     private StudentStatus status;
 }

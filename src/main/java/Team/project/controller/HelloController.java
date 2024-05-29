@@ -21,4 +21,9 @@ public class HelloController {
         return "hi";
     }
 
+    @GetMapping("/main")
+    public String index(){
+        return "common/main";
+    }
+
 }
