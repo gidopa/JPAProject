@@ -5,6 +5,6 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class SemesterInfo {
 
-    private int year;
+    private int years;
     private int semester;
 }
