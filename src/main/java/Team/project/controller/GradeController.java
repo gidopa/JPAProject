@@ -1,7 +1,6 @@
 package Team.project.controller;
 
 import Team.project.dto.grade.GradeDto;
-import Team.project.entity.GradeType;
 import Team.project.entity.Student;
 import Team.project.service.Student.StudentService;
 import Team.project.service.grade.GradeService;
@@ -33,6 +32,7 @@ public class GradeController {
         model.addAttribute("allGrade", allGrade);
         return "grade/List";
     }
+
     // 교수가 자기 강의를 수강하는 학생들의 성적 조회
     @GetMapping("/grades/{courseId}")
     public String gradeListByCourse(@PathVariable Long courseId, Model model){
