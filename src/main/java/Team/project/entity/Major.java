@@ -15,7 +15,7 @@ public class Major {
     @Id
     @GeneratedValue
     @Column(name = "major_id")
-    private String id;
+    private Long id;
 
     private String name;
 

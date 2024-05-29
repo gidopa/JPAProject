@@ -15,9 +15,12 @@ public class Professor {
     @GeneratedValue
     @Column(name = "professor_id")
     private Long id;
+
+    @Column(unique = true)
+    private Long loginId;
     private String name;
 
-    private Long password;
+    private String password;
 
     @OneToMany(mappedBy = "professor")
     private List<Course> courses;
