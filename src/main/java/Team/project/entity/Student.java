@@ -33,8 +33,7 @@ public class Student {
     @Embedded
     private Address address;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "credit_id")
+    @OneToOne(mappedBy = "student")
     private Credit credit;
 
     @Embedded
@@ -42,4 +41,12 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     private StudentStatus status;
+
+    public Student(String name, Major major, Long hakbun) {
+        this.name = name;
+        this.major = major;
+        this.hakbun = hakbun;
+    }
 }
+
+
