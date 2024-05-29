@@ -17,6 +17,8 @@ public class Professor {
     private Long id;
     private String name;
 
+    private Long password;
+
     @OneToMany(mappedBy = "professor")
     private List<Course> courses;
 

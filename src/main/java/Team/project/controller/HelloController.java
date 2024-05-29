@@ -21,9 +21,9 @@ public class HelloController {
         return "hi";
     }
 
-    @GetMapping("/index")
+    @GetMapping("/main")
     public String index(){
-        return "layout1/layoutExtendMain";
+        return "common/main";
     }
 
 }

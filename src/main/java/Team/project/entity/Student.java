@@ -21,6 +21,8 @@ public class Student {
     private Long hakbun;
     private String name;
 
+    private Long password;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id")
     private Major major;
