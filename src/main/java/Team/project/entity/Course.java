@@ -29,6 +29,7 @@ public class Course {
     private double reportWeight; // 레포트 가중치
 
     private int credit; // 몇 학점 짜리 강의인지
+
     @Enumerated(EnumType.STRING)
     private Category category; // 전공 / 교양
     @Embedded

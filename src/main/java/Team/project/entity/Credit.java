@@ -13,8 +13,10 @@ public class Credit { // 평균 학점
     @GeneratedValue
     @Column(name = "credit_id")
     private Long id;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private Student student;
+
     private float credit; // 평균 학점
 }
