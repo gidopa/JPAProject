@@ -1,46 +1,51 @@
 <!DOCTYPE html>
-<html th:replace="~{common/layoutFile :: layout(~{::title},~{::section})}"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head"></head>
+<link href="/login/style.css" rel="stylesheet" />
+
+<div th:if="${errorMessage}">
+    <script th:inline="javascript">
+        alert([[${errorMessage}]]);
+    </script>
+</div>
+
 <body>
-<section>
-    <div class="login-wrap">
-        <div class="login-html">
-            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
-            <form action="/login" th:object="${loginDto}" method="post" class="login-form">
-                <div class="sign-in-htm">
-                    <div class="group">
-                        <label th:for="id" class="label">Id</label>
-                        <input type="text" class="input" th:field="*{id}" placeholder="아이디를 입력해주세요.">
-                        <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="error-message"></p>
-                    </div>
-                    <div class="group">
-                        <label th:for="password" class="label">Password</label>
-                        <input th:field="*{password}" type="password" class="input" data-type="password" placeholder="비밀번호를 입력해주세요.">
-                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></p>
-                    </div>
-                    <div class="group">
-                        <input id="check" type="checkbox" class="check" checked>
-                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                    </div>
-                    <div class="group">
-                        <input type="submit" class="button" value="Sign In">
-                    </div>
-                    <div class="hr"></div>
-                    <div class="foot-lnk">
-                        <a href="#forgot">Forgot Password?</a>
-                    </div>
+<div th:replace="common/nav :: nav"></div>
+<div th:replace="common/nav :: section"></div>
+
+<div class="login-wrap">
+    <div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+        <form action="/login" th:object="${loginDto}" method="post" class="login-form">
+            <div class="sign-in-htm">
+                <div class="group">
+                    <label th:for="id" class="label">Id</label>
+                    <input type="text" class="input" th:field="*{id}" placeholder="아이디를 입력해주세요.">
+                    <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="error-message"></p>
                 </div>
-            </form>
-        </div>
+                <div class="group">
+                    <label th:for="password" class="label">Password</label>
+                    <input th:field="*{password}" type="password" class="input" data-type="password" placeholder="비밀번호를 입력해주세요.">
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></p>
+                </div>
+                <div class="group">
+                    <input id="check" type="checkbox" class="check" checked>
+                    <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                </div>
+                <div class="group">
+                    <input type="submit" class="button" value="Sign In">
+                </div>
+                <div class="hr"></div>
+                <div class="foot-lnk">
+                    <a href="#forgot">Forgot Password?</a>
+                </div>
+            </div>
+        </form>
     </div>
-</section>
+</div>
+
+<div th:replace="common/footer :: span"></div>
+
 </body>
 </html>
