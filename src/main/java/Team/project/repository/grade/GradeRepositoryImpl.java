@@ -2,6 +2,7 @@ package Team.project.repository.grade;
 
 import Team.project.dto.grade.GradeDto;
 import Team.project.dto.grade.QGradeDto;
+import Team.project.entity.QAssessment;
 import Team.project.entity.QCourse;
 import Team.project.entity.QEnroll;
 import Team.project.entity.QStudent;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+import static Team.project.entity.QAssessment.*;
 import static Team.project.entity.QCourse.*;
 import static Team.project.entity.QEnroll.*;
 import static Team.project.entity.QStudent.*;
@@ -33,8 +35,13 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom{
     public List<GradeDto> findAllGradeByStudentId(Long studentId) {
         return queryFactory
                 .select(new QGradeDto(
-                        student.as("student"),
-                        course.as("course"),
+                        student.name.as("studentName"),
+                        student.major.name.as("major"),
+                        course.id.as("courseId"),
+                        course.courseName.as("courseName"),
+                        assessment.midTermScore,
+                        assessment.finalTermScore,
+                        assessment.reportScore,
                         enroll.gradeType
                 ))
                 .from(enroll)
@@ -49,11 +56,19 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom{
     public List<GradeDto> findAllGradeByCourseId(Long courseId) {
         return queryFactory
                 .select(new QGradeDto(
-                        student.as("student"),
-                        course.as("course"),
+                        student.name.as("studentName"),
+                        student.major.name.as("major"),
+                        course.id.as("courseId"),
+                        course.courseName.as("courseName"),
+                        assessment.midTermScore,
+                        assessment.finalTermScore,
+                        assessment.reportScore,
                         enroll.gradeType
                 ))
                 .from(enroll)
+                .innerJoin(enroll.student,student)
+                .innerJoin(enroll.course, course)
+                .innerJoin(enroll.assessment, assessment)
                 .where(course.id.eq(courseId))
                 .fetch();
     }

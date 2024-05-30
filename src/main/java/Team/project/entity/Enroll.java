@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -54,61 +55,65 @@ public class Enroll {
                 .map(Enroll::getAssessment)
                 .sorted(Comparator.comparingDouble(Assessment::calculateTotalScore).reversed())
                 .toList();
-        for (Assessment assessment : assessments) {
-            System.out.println("assessment = " + assessment);
-        }
         int totalStudents = assessments.size();
-
         // 상위 10% A+
         int aPlusCount = (int)Math.ceil((totalStudents * 0.1));
         System.out.println("aPlusCount = " + aPlusCount);
         // 상위 20%는 A
         int aCount = (int) Math.ceil((totalStudents * 0.2));
-        System.out.println("aCount = " + aCount);
         // 상위 30%는 B+
         int bPlusCount = (int)Math.ceil((totalStudents * 0.3));
-        System.out.println("bPlusCount = " + bPlusCount);
         int bCount = (int) Math.ceil((totalStudents * 0.4));
-        System.out.println("bCount = " + bCount);
         int cPlusCount = (int) Math.ceil((totalStudents * 0.5));
-        System.out.println("cPlusCount = " + cPlusCount);
         int cCount = (int) Math.ceil((totalStudents * 0.6));
-        System.out.println("cCount = " + cCount);
         int dPlusCount = (int) Math.ceil((totalStudents * 0.7));
-        System.out.println("dPlusCount = " + dPlusCount);
         int dCount = (int) Math.ceil((totalStudents * 0.8));
-        System.out.println("dCount = " + dCount);
 
 
         int index = 0;
         for(;index<aPlusCount;index++){
-            enrolls.get(index).setGradeType(GradeType.APLUS);
+            assessments.get(index).getEnroll().setGradeType(GradeType.APLUS);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
+            
         }
         for(;index<aCount;index++){
-            enrolls.get(index).setGradeType(GradeType.AZERO);
+            assessments.get(index).getEnroll().setGradeType(GradeType.AZERO);
+            System.out.println("index = " + index);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
         }
         for(;index<bPlusCount;index++){
-            enrolls.get(index).setGradeType(GradeType.BPLUS);
+            assessments.get(index).getEnroll().setGradeType(GradeType.BPLUS);
+            System.out.println("index = " + index);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
         }
         for(;index<bCount;index++){
-            enrolls.get(index).setGradeType(GradeType.BZERO);
+            assessments.get(index).getEnroll().setGradeType(GradeType.BZERO);
+            System.out.println("index = " + index);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
         }
         for(;index<cPlusCount;index++){
-            enrolls.get(index).setGradeType(GradeType.CPLUS);
+            assessments.get(index).getEnroll().setGradeType(GradeType.CPLUS);
+            System.out.println("index = " + index);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
         }
         for(;index<cCount;index++){
-            enrolls.get(index).setGradeType(GradeType.CZERO);
+            assessments.get(index).getEnroll().setGradeType(GradeType.CZERO);
+            System.out.println("index = " + index);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
         }
         for(;index<dPlusCount;index++){
-            enrolls.get(index).setGradeType(GradeType.DPLUS);
+            assessments.get(index).getEnroll().setGradeType(GradeType.DPLUS);
+            System.out.println("index = " + index);
+            System.out.println("assessments.get(index) = " + assessments.get(index));
         }
 
         for(;index<dCount;index++){
-            enrolls.get(index).setGradeType(GradeType.DZERO);
+            System.out.println("index = " + index);
+            assessments.get(index).getEnroll().setGradeType(GradeType.DZERO);
         }
 
         for(;index<totalStudents;index++){
-            enrolls.get(index).setGradeType(GradeType.F);
+            assessments.get(index).getEnroll().setGradeType(GradeType.F);
         }
 
 

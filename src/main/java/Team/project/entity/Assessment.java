@@ -29,6 +29,10 @@ public class Assessment {
     private double reportScore; // 레포트 점수
     private double totalScore ;
 
+    public void setEnroll(Enroll enroll) {
+        this.enroll = enroll;
+    }
+
     public void changeAssessment(Double totalScore, Enroll enroll){
         this.totalScore = totalScore;
         enroll.changeAssessment(this);
