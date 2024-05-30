@@ -3,7 +3,6 @@ package Team.project.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class Student {
     private Long hakbun;
     private String name;
 
-    private Long password;
+    private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id")
