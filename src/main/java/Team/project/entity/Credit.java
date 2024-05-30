@@ -14,7 +14,8 @@ public class Credit { // 평균 학점
     @Column(name = "credit_id")
     private Long id;
 
-    @OneToOne(mappedBy = "credit")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
     private Student student;
 
     private float credit; // 평균 학점

@@ -21,4 +21,11 @@ public class Major {
 
     @OneToMany(mappedBy = "major")
     private List<Professor> professors = new ArrayList<>();
+
+
+
+    public Major(String name, List<Professor> professors) {
+        this.name = name;
+        this.professors = professors;
+    }
 }

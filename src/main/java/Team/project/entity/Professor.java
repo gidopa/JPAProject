@@ -31,4 +31,14 @@ public class Professor {
 
     @Embedded
     private Address address;
+
+    public void changeMajor(Major major){
+         this.major = major;
+         major.getProfessors().add(this);
+     }
+
+    public Professor(String name, Major major) {
+        this.name = name;
+        this.major = major;
+    }
 }
