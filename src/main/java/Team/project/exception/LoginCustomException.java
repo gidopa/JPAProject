@@ -1,6 +1,6 @@
 package Team.project.exception;
 
-public class LoginCustomException extends RuntimeException{
+public class LoginCustomException extends IllegalArgumentException{
 
     public LoginCustomException(String message){
         super(message);
