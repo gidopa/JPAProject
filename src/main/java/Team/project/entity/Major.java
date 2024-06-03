@@ -13,7 +13,7 @@ import java.util.List;
 public class Major {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "major_id")
     private Long id;
 

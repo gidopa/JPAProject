@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Credit { // 평균 학점
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "credit_id")
     private Long id;
 
