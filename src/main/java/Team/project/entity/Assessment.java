@@ -1,5 +1,6 @@
 package Team.project.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +25,10 @@ public class Assessment {
     private Enroll enroll;
 
 
-    private double midTermScore; // 중간고사 점수
-    private double finalTermScore; // 기말고사 점수
-    private double reportScore; // 레포트 점수
-    private double totalScore ;
+    private Double midTermScore; // 중간고사 점수
+    private Double finalTermScore; // 기말고사 점수
+    private Double reportScore; // 레포트 점수
+    private Double totalScore ;
 
     public void setEnroll(Enroll enroll) {
         this.enroll = enroll;
