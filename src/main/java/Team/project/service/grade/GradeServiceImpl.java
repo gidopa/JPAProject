@@ -23,6 +23,7 @@ public class GradeServiceImpl implements GradeService{
 
     @Override
     public List<GradeDto> findAllGradeByStudentId(Long studentId) {
+
         return gradeRepository.findAllGradeByStudentId(studentId);
     }
 
@@ -31,15 +32,15 @@ public class GradeServiceImpl implements GradeService{
         return gradeRepository.findAllGradeByCourseId(courseId);
     }
 
+    /**
+     * 시험성적 부여 후 종합 성적 다시 부여
+     */
     @Transactional
     @Override
     public void assignGrade(GradeEditDto editDto) {
         gradeRepository.assignGrade(editDto);
+        // enroll List 다시 select 해서 새로운 list로 성적 다시 부여
         List<Enroll> findEnrollList = enrollRepository.findByCourseId(editDto.getCourseId());
-        for (Enroll enroll : findEnrollList) {
-            System.out.println("enroll.getStudent().get = " + enroll.getStudent().getName());
-            System.out.println("enroll = " + enroll.getAssessment().getMidTermScore());
-        }
         Enroll.assignGrade(findEnrollList);
     }
 }

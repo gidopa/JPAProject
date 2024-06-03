@@ -4,11 +4,9 @@ import Team.project.entity.Assessment;
 import com.querydsl.core.annotations.QueryProjection;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.validator.constraints.Range;
 
 @Data
 @NoArgsConstructor

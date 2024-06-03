@@ -21,10 +21,13 @@ public class CourseController {
 
     private final ProfessorService professorService;
 
+    /**
+     * 교수로 로그인 했을때 성적 조회 화면 뿌려줌
+     */
     @GetMapping("/web/grades/professors/{professorId}")
     public String gradeListByProfessor(@PathVariable Long professorId, Model model){
         List<Course> courseList = professorService.findGradeListBy(professorId);
         model.addAttribute("courseList",courseList);
-        return "grade/List";
+        return "grade/myList";
     }
 }

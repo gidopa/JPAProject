@@ -36,15 +36,17 @@ public class GradeController {
 
 
     // 학생이 학번으로 로그인 한 후 자신의 성적 조회
-    @GetMapping("/grades/{studentId}")
-    public String allGrades(Model model, @SessionAttribute(value = "hakbun", required = false)Long hakbun) {
-        hakbun= (long) 20240001;
+    @GetMapping("/grades/students")
+    public String allGrades(Model model, @SessionAttribute LoginDto loginDto) {
+        String id = loginDto.getId();
+        long hakbun = Long.parseLong(id);
         Optional<Student> findStudent = studentService.findByHakbun(hakbun);
         Student student = findStudent.orElseThrow(() -> new IllegalArgumentException("학번으로 학생을 조회할 수 없음"));
         Long studentId = student.getId();
         List<GradeDto> allGrade = gradeService.findAllGradeByStudentId(studentId);
         model.addAttribute("allGrade", allGrade);
-        return "grade/List";
+        log.info("여기임");
+        return "grade/myList";
     }
 
     // 교수가 자기 강의를 수강하는 학생들의 성적 조회
@@ -55,6 +57,7 @@ public class GradeController {
         log.info("왔냐");
         return ResponseEntity.ok(gradeList);
     }
+
     // 성적 수정 form 요청
     @GetMapping("/web/grades/{courseId}/students/{studentId}")
     public String editGradeForm(@PathVariable Long courseId, @PathVariable Long studentId, Model model){
@@ -62,9 +65,10 @@ public class GradeController {
         model.addAttribute("findDto",findDto);
         return "grade/editForm";
     }
-    // 성적 수정
+
+    // 성적 부여 / 수정
     @PostMapping("/web/grades/{courseId}/students/{studentId}")
-    public String gradeListByProfessor(@Valid @ModelAttribute GradeEditDto editDto, BindingResult bindingResult,
+    public String gradeListByProfessor(@Valid @ModelAttribute("findDto") GradeEditDto editDto, BindingResult bindingResult,
                                        @PathVariable Long courseId, Model model, @SessionAttribute LoginDto loginDto){
         if(bindingResult.hasErrors()){
             return "grade/editForm";
