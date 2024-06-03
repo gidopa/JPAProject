@@ -6,29 +6,103 @@
 </head>
 <body>
 <section>
+    <div th:if="${session.loginDto != null}">
+        <div th:if="${session.loginDto.professorId}">
+            <div>
+                <label for="courseDropdown">Select a course:</label>
+                <select id="courseDropdown" class="form-control">
+                    <option value="" disabled selected>Select your option</option>
+                    <option th:each="course : ${courseList}" th:value="${course.id}" th:text="${course.courseName}"></option>
+                </select>
+                <div>
+                    <table class="table table-striped mt-3">
+                        <thead>
+                        <tr>
+                            <th>학생이름</th>
+                            <th>과목</th>
+                            <th>중간고사</th>
+                            <th>기말고사</th>
+                            <th>레포트점수</th>
+                            <th>학점</th>
+                            <th>수정</th>
+                        </tr>
+                        </thead>
+                        <tbody id="gradesTableBody">
+                        <!-- AJAX로 데이터를 채울 영역 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${session.loginDto != null}">
+        <div th:if="${session.loginDto.studentId}">
     <div>
         <div>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>이름</th>
-                    <th>학과</th>
                     <th>과목</th>
+                    <th>중간고사</th>
+                    <th>기말고사</th>
+                    <th>레포트점수</th>
                     <th>학점</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="grade : ${allGrade}">
-                    <td th:text="${grade.student.name}"></td>
-                    <td th:text="${grade.student.major.name}"></td>
+                    <td th:text="${grade.studentName}"></td>
                     <!-- address가 null 일때 처리를 ?로 한다 -> 안나옴 -->
-                    <td th:text="${grade.course.courseName}"></td>
+                    <td th:text="${grade.courseName}"></td>
+                    <td th:text="${grade.midTermScore}"></td>
+                    <td th:text="${grade.finalTermScore}"></td>
+                    <td th:text="${grade.reportScore}"></td>
                     <td th:text="${@enumUtil.getDisplayName(grade.gradeType)}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#courseDropdown').change(function() {
+                var courseId = $(this).val();
+                console.log("gd")
+                if (courseId) {
+                    $.ajax({
+                        url: '/web/grades/courses/' + courseId, // 서버의 엔드포인트 설정
+                        type: 'GET',
+                        success: function(data) {
+                            var gradesTableBody = $('#gradesTableBody');
+                            gradesTableBody.empty(); // 기존 데이터를 모두 삭제
+                            console.log(data);
+                            $.each(data, function(index, grade) {
+                                gradesTableBody.append(
+                                    '<tr>' +
+                                    '<td>' + grade.studentName + '</td>' +
+                                    '<td>' + grade.courseName + '</td>' +
+                                    '<td>' + grade.midTermScore + '</td>' +
+                                    '<td>' + grade.finalTermScore + '</td>' +
+                                    '<td>' + grade.reportScore + '</td>' +
+                                    '<td>' + grade.gradeType + '</td>' +
+                                    '<td><a href="/web/grades/' + grade.courseId + '/students/' + grade.studentId + '" class="btn btn-primary">수정</a></td>' +
+                                    '</tr>'
+                                );
+                            });
+                        },
+                        error: function(error) {
+                            console.log("Error:", error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </section>
+
 </body>
 </html>
