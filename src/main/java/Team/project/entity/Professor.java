@@ -1,5 +1,6 @@
 package Team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Professor {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "professor_id")
     private Long id;
 
@@ -23,6 +24,7 @@ public class Professor {
     private String password;
 
     @OneToMany(mappedBy = "professor")
+    @JsonManagedReference
     private List<Course> courses;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,6 +41,13 @@ public class Professor {
 
     public Professor(String name, Major major) {
         this.name = name;
+        this.major = major;
+    }
+
+    public Professor (Long loginId,String name, String password, Major major) {
+        this.loginId = loginId;
+        this.name = name;
+        this.password = password;
         this.major = major;
     }
 }
