@@ -1,5 +1,7 @@
 package Team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,7 @@ public class Course {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "professor_id")
+    @JsonBackReference
     private Professor professor;
 
     @OneToMany(mappedBy = "course")
