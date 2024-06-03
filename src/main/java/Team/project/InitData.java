@@ -32,7 +32,7 @@ public class InitData {
         @Transactional
         public void init(){
             Major computer = new Major("computer", new ArrayList<>());
-            Professor p1 = new Professor("p1", computer);
+            Professor p1 = new Professor((long)33330103,"p1", "password12345",computer);
             p1.changeMajor(computer);
             Course java = new Course("JAVA", p1, 0.3, 0.3, 0.4, 3, Category.MAJOR);
 
@@ -42,8 +42,8 @@ public class InitData {
             em.persist(java);
             List<Enroll> enrolls = new ArrayList<>();
 
-            for (int i = 1; i < 20; i++) {
-                Student student = new Student("student"+i, computer, Long.parseLong(String.valueOf(20240000 + i)));
+            for (int i = 1; i < 24; i++) {
+                Student student = new Student("student"+i, computer, Long.parseLong(String.valueOf(20240000 + i)),"qwer1234");
                 Enroll enroll = new Enroll(student, java, null);
                 Assessment assessment = new Assessment(i + 80, i + 80, i + 80, enroll);
                 double totalScore = assessment.calculateTotalScore();
