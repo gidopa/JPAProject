@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-block d-lg-none">Clarence Taylor</span>
+            <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/assets/img/profile.jpg" alt="..." /></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+            <div th:if="${session.loginDto != null}">
+                <div th:if="${session.loginDto.studentId}">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">정보 변경</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">학적표</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">휴학, 복학</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/grades/students">성적 조회</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">수강 신청</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Main</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div th:if="${session.loginDto != null}">
+                <div th:if="${session.loginDto.professorId}">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">강의 등록</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{/web/grades/professors/{professorId}(professorId=${session.loginDto.professorId})}">성적 부여</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Main</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div th:if="${session.loginDto == null}">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">하세요</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">휴학, 복학</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/grades">성적 조회</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">수강 신청</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Main</a></li>
+                    </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<section>
+    <div th:if="${session.loginDto == null}">
+        <div class="login">
+            <a href="/login" align="right">
+                <button type="button" class="btn btn-primary">로그인</button>
+            </a>
+        </div>
+    </div>
+
+    <div th:if="${session.loginDto != null}">
+        <div class="login">
+            <a href="/loginout" align="right">
+                <button type="button" class="btn btn-primary">로그아웃</button>
+            </a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

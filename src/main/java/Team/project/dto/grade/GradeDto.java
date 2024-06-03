@@ -1,6 +1,5 @@
 package Team.project.dto.grade;
 
-import Team.project.entity.Assessment;
 import Team.project.entity.Course;
 import Team.project.entity.GradeType;
 import Team.project.entity.Student;
@@ -14,24 +13,24 @@ public class GradeDto {
 
     /*private Long studentId;
     private Long courseId;*/
-    private String studentName;
-    private String major;
+    private Long studentId;
     private Long courseId;
+    private String studentName;
     private String courseName;
-    private double midTermScore;
-    private double finalTermScore;
-    private double reportScore;
+    private double midTermScore; // 중간고사 점수
+    private double finalTermScore; // 기말고사 점수
+    private double reportScore; // 레포트 점수
     private GradeType gradeType;
 
     @QueryProjection
-    public GradeDto(String studentId, String major, Long courseId,String courseName, double midTerm, double finalTerm, double report, GradeType gradeType) {
-        this.studentName = studentId;
-        this.major = major;
+    public GradeDto(Long studentId, Long courseId,String studentName, String courseName, double midTermScore, double finalTermScore, double reportScore, GradeType gradeType) {
+        this.studentId = studentId;
         this.courseId = courseId;
+        this.studentName = studentName;
         this.courseName = courseName;
-        this.midTermScore = midTerm;
-        this.finalTermScore = finalTerm;
-        this.reportScore = report;
+        this.midTermScore = midTermScore;
+        this.finalTermScore = finalTermScore;
+        this.reportScore = reportScore;
         this.gradeType = gradeType;
     }
 }

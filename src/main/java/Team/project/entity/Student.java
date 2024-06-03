@@ -3,7 +3,6 @@ package Team.project.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
     private Long id;
 
@@ -21,7 +20,7 @@ public class Student {
     private Long hakbun;
     private String name;
 
-    private Long password;
+    private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id")
@@ -42,10 +41,11 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private StudentStatus status;
 
-    public Student(String name, Major major, Long hakbun) {
-        this.name = name;
-        this.major = major;
+    public Student(String name, Major major, Long hakbun,  String password) {
         this.hakbun = hakbun;
+        this.name = name;
+        this.password = password;
+        this.major = major;
     }
 }
 
