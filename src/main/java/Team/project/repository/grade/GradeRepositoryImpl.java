@@ -48,8 +48,6 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom{
                         enroll.gradeType
                 ))
                 .from(enroll)
-                .join(assessment)
-                .on(enroll.id.eq(assessment.enroll.id))
                 .where(student.id.eq(studentId))
                 .fetch();
     }
@@ -76,6 +74,10 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom{
                 .where(course.id.eq(courseId))
                 .fetch();
     }
+
+    /**
+     * 성적 부여
+     */
 
     @Transactional
     @Override
