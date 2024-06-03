@@ -14,19 +14,22 @@
     <form th:action th:object="${findDto}" method="post">
         <div class="form-group">
             <label for="studentName">Student Name</label>
-            <input type="text" id="studentName" th:field="*{studentName}" th:text="${findDto.studentName}" class="form-control" readonly />
+            <input type="text" id="studentName" th:field="*{studentName}" th:text="${findDto?.studentName}" class="form-control" readonly />
         </div>
         <div class="form-group">
             <label for="midTermScore">Mid Term Score</label>
-            <input type="number" step="0.1" id="midTermScore" th:field="*{midTermScore}" th:text="${findDto.midTermScore}" class="form-control" />
+            <input type="number" step="0.1" id="midTermScore" th:field="*{midTermScore}" th:text="${findDto?.midTermScore}" class="form-control" />
+            <p th:if="${#fields.hasErrors('midTermScore')}" th:errors="*{midTermScore}" class="error-message"></p>
         </div>
         <div class="form-group">
             <label for="finalTermScore">Final Term Score</label>
-            <input type="number" step="0.1" id="finalTermScore" th:field="*{finalTermScore}" th:text="${findDto.finalTermScore}" class="form-control" />
+            <input type="number" step="0.1" id="finalTermScore" th:field="*{finalTermScore}" th:text="${findDto?.finalTermScore}" class="form-control" />
+            <p th:if="${#fields.hasErrors('finalTermScore')}" th:errors="*{finalTermScore}" class="error-message"></p>
         </div>
         <div class="form-group">
             <label for="reportScore">Report Score</label>
-            <input type="number" step="0.1" id="reportScore" th:field="*{reportScore}" th:text="${findDto.reportScore}" class="form-control" />
+            <input type="number" step="0.1" id="reportScore" th:field="*{reportScore}" th:text="${findDto?.reportScore}" class="form-control" />
+            <p th:if="${#fields.hasErrors('reportScore')}" th:errors="*{reportScore}" class="error-message"></p>
         </div>
         <div class="form-group">
             <input type="hidden" th:field="${findDto.studentId}" />
