@@ -1,5 +1,6 @@
 package Team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Professor {
     private String password;
 
     @OneToMany(mappedBy = "professor")
+    @JsonManagedReference
     private List<Course> courses;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,9 +44,17 @@ public class Professor {
         this.major = major;
     }
 
+    public Professor (Long loginId,String name, String password, Major major) {
+        this.loginId = loginId;
+        this.name = name;
+        this.password = password;
+        this.major = major;
+    }
+  
     public void updateProfessor(String name, String password, String city, String street){
         this.name = name;
         this.password = password;
         this.address.updateAddress(city, street);
     }
+      
 }

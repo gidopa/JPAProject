@@ -41,10 +41,11 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private StudentStatus status;
 
-    public Student(String name, Major major, Long hakbun) {
-        this.name = name;
-        this.major = major;
+    public Student(String name, Major major, Long hakbun,  String password) {
         this.hakbun = hakbun;
+        this.name = name;
+        this.password = password;
+        this.major = major;
     }
 
     public void updateStudent(String name, String password, String city, String street){

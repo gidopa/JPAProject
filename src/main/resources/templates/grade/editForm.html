@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head"></head>
+<link href="/login/style.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<body>
+<div th:replace="common/nav :: nav"></div>
+<div th:replace="common/nav :: section"></div>
+
+<div class="container">
+    <h2>Edit Grades</h2>
+    <form th:action th:object="${findDto}" method="post">
+        <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" th:field="*{studentName}" th:text="${findDto?.studentName}" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label for="midTermScore">Mid Term Score</label>
+            <input type="number" step="0.1" id="midTermScore" th:field="*{midTermScore}" th:text="${findDto?.midTermScore}" class="form-control" />
+            <p th:if="${#fields.hasErrors('midTermScore')}" th:errors="*{midTermScore}" class="error-message"></p>
+        </div>
+        <div class="form-group">
+            <label for="finalTermScore">Final Term Score</label>
+            <input type="number" step="0.1" id="finalTermScore" th:field="*{finalTermScore}" th:text="${findDto?.finalTermScore}" class="form-control" />
+            <p th:if="${#fields.hasErrors('finalTermScore')}" th:errors="*{finalTermScore}" class="error-message"></p>
+        </div>
+        <div class="form-group">
+            <label for="reportScore">Report Score</label>
+            <input type="number" step="0.1" id="reportScore" th:field="*{reportScore}" th:text="${findDto?.reportScore}" class="form-control" />
+            <p th:if="${#fields.hasErrors('reportScore')}" th:errors="*{reportScore}" class="error-message"></p>
+        </div>
+        <div class="form-group">
+            <input type="hidden" th:field="${findDto.studentId}" />
+        </div>
+        <div class="form-group">
+            <input type="hidden" th:field="${findDto.courseId}" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+<div th:replace="common/footer :: span"></div>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 -- Major 데이터 삽입
 INSERT INTO Major ( major_id, name) VALUES ( 2,'경영학과'), ( 1,'컴퓨터공학');
 
--- Student 데이터 삽입
+---- Student 데이터 삽입
 INSERT INTO student (student_id, hakbun, name, password, major_id, city, street,  years, semester, status)
 VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 2024, 2, 'ENROLLED'),
        (2, 20000102, 'Kim Wongi', 'password124', 2, 'Cityville', '123 Main St',  2024, 2, 'ENROLLED'),
@@ -16,18 +16,16 @@ VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 2
 
 -- Credit 데이터 삽입
 INSERT INTO Credit (credit_id,student_id, credit) VALUES (1, 1,4.0), (2, 2,1.8), (3, 3,2.0);
+--
 
--- Professor 데이터 삽입
 INSERT INTO Professor (professor_id, login_id, password, name, city, street, major_id)
 VALUES (1, 33330101, 'password123', 'pro', 'Cityville', '123 Main St', 1),
        (2, 33330102, 'password124', 'pro2', 'Cityville', '123 Main St', 1);
 
--- Course 데이터 삽입
 insert into course (credit, mid_term_weight, final_term_weight, report_weight, course_id, professor_id, course_name)
 values ( 3,0.3,0.3,0.4, 1, 1,'JAVA'),
        (3,0.4,0.4,0.2,2,2,'Python');
 
--- Enroll 데이터 삽입
 insert into enroll (course_id, enroll_id, student_id, grade_type)
 values ( 1, 1,1, 'APLUS'),
        ( 1, 2,2, 'BPLUS'),
