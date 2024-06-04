@@ -41,4 +41,10 @@ public class Professor {
         this.name = name;
         this.major = major;
     }
+
+    public void updateProfessor(String name, String password, String city, String street){
+        this.name = name;
+        this.password = password;
+        this.address.updateAddress(city, street);
+    }
 }
