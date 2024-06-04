@@ -10,6 +10,7 @@ VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 2
 -- Credit 데이터 삽입
 INSERT INTO Credit (credit_id, credit, student_id) VALUES (1, 4.0, 1), (2, 1.8, 2), (3, 2.0, 3);
 
+-- Professor 테이터 삽입
 INSERT INTO Professor(professor_id, login_id, password, name, city, street, major_id)
 VALUES (1, 33330101, 'password123', 'pro', 'Cityville', '123 Main St', 1),
 (2, 33330102, 'password124', 'pro2', 'Cityville', '123 Main St', 1);
