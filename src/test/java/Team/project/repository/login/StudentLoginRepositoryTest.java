@@ -9,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -32,8 +33,59 @@ class StudentLoginRepositoryTest {
         if(student == null){
             return;
         }else {
+            System.out.println(student.getHakbun());
             assertThat(student.getHakbun()).isEqualTo(hakbun);
             assertThat(student.getId()).isEqualTo(1L);
+        }
+    }
+
+    @Test
+    @DisplayName("fetch join 조회")
+    public void findStudentById() throws Exception{
+        // given
+        Long id = 1L;
+        Long hakbun = 20000101L;
+        String city  = "Cityville";
+        int years = 2024;
+        String status = "ENROLLED";
+
+        // when
+        Student student = studentLoginRepository.findStudentById(id).orElse(null);
+
+        // then
+        if(student == null){
+            return;
+        }else{
+            assertThat(student.getId()).isEqualTo(id);
+            assertThat(student.getHakbun()).isEqualTo(hakbun);
+            assertThat(student.getAddress().getCity()).isEqualTo(city);
+            assertThat(student.getSemesterInfo().getYears()).isEqualTo(years);
+            assertThat(student.getStatus().name()).isEqualTo(status);
+        }
+    }
+
+    @Test
+    @DisplayName("학번, id 조회")
+    public void findByHakbunAndId() {
+        // given
+        Long id = 1L;
+        Long hakbun = 20000101L;
+        String city  = "Cityville";
+        int years = 2024;
+        String status = "ENROLLED";
+
+        // when
+        Student student = studentLoginRepository.findByHakbunAndId(hakbun, id).orElse(null);
+
+        // then
+        if(student == null){
+            fail("실패");
+        }else {
+            assertThat(student.getId()).isEqualTo(id);
+            assertThat(student.getHakbun()).isEqualTo(hakbun);
+            assertThat(student.getAddress().getCity()).isEqualTo(city);
+            assertThat(student.getSemesterInfo().getYears()).isEqualTo(years);
+            assertThat(student.getStatus().name()).isEqualTo(status);
         }
     }
 }
