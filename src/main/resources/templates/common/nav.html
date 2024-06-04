@@ -13,7 +13,7 @@
             <div th:if="${session.loginDto != null}">
                 <div th:if="${session.loginDto.studentId}">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">정보 변경</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{|/web/student/info/${session.loginDto.studentId}|}">정보 변경</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">학적표</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">휴학, 복학</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/grades/students">성적 조회</a></li>
@@ -27,6 +27,7 @@
                 <div th:if="${session.loginDto.professorId}">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">강의 등록</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{|/web/professor/info/${session.loginDto.professorId}|}">정보 변경</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" th:href="@{/web/grades/professors/{professorId}(professorId=${session.loginDto.professorId})}">성적 부여</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/">Main</a></li>
                     </ul>
@@ -51,7 +52,7 @@
 <section>
     <div th:if="${session.loginDto == null}">
         <div class="login">
-            <a href="/login" align="right">
+            <a href="/web/login" align="right">
                 <button type="button" class="btn btn-primary">로그인</button>
             </a>
         </div>
@@ -59,7 +60,7 @@
 
     <div th:if="${session.loginDto != null}">
         <div class="login">
-            <a href="/loginout" align="right">
+            <a href="/logout" align="right">
                 <button type="button" class="btn btn-primary">로그아웃</button>
             </a>
         </div>

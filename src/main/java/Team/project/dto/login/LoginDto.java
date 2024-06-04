@@ -14,9 +14,9 @@ import lombok.Setter;
 public class LoginDto {
 
     @Pattern(regexp = "\\d{8}", message = "8자리 숫자로 입력해주세요")
-    private String id;
-    private Long studentId;
-    private Long professorId;
+    private String id;  // 로그인 id
+    private Long studentId; // 학생 pk
+    private Long professorId; // 교수 pk
 
     @NotEmpty(message = "비밀번호는 필수입니다.")
     private String password;
