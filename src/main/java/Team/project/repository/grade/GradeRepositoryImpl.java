@@ -69,7 +69,7 @@ public class GradeRepositoryImpl implements GradeRepositoryCustom{
                         enroll.gradeType
                 ))
                 .from(enroll)
-                .join(assessment)
+                .join(enroll.assessment, assessment)
                 .on(enroll.id.eq(assessment.enroll.id))
                 .where(course.id.eq(courseId))
                 .fetch();

@@ -28,10 +28,18 @@ public class AssessmentRepositoryImpl implements AssessmentRepositoryCustom{
         this.queryFactory = new JPAQueryFactory(em);
     }
 
+    /**
+     * courseId와 studentId로 성적 수정 폼 요청 시 뿌려줄 데이터 얻어오는 메소드
+     */
     @Override
     public GradeEditDto findCourseGradeByCourseId(Long courseId, Long studentId) {
         return queryFactory
-                .select(new QGradeEditDto(student.id.as("student_id"), course.id,student.name, assessment.midTermScore, assessment.finalTermScore, assessment.reportScore))
+                .select(new QGradeEditDto(
+                        student.id.as("student_id"),
+                        course.id,student.name,
+                        assessment.midTermScore,
+                        assessment.finalTermScore,
+                        assessment.reportScore))
                 .from(assessment)
                 .join(assessment.enroll, enroll)
                 .on(enroll.course.id.eq(courseId))

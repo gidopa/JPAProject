@@ -1,6 +1,7 @@
 package Team.project.repository.grade;
 
 import Team.project.dto.grade.GradeDto;
+import Team.project.dto.grade.GradeEditDto;
 import Team.project.entity.*;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
@@ -36,6 +37,36 @@ public class GradeRepositoryTest {
         assertThat(gradeListByStudent).extracting(gradeDto -> gradeDto.getCourseName())
                 .containsExactly("JAVA", "Python");
     }
+
+    @Test
+    void 강의별_성적_조회() {
+        long courseIdJava = 1L;
+        long courseIdPython  = 2L;
+        List<GradeDto> gradeListByCourseJava = gradeRepository.findAllGradeByCourseId(courseIdJava);
+        List<GradeDto> gradeListByCoursePython = gradeRepository.findAllGradeByCourseId(courseIdPython);
+        assertThat(gradeListByCourseJava.size()).isEqualTo(10);
+        assertThat(gradeListByCoursePython.size()).isEqualTo(1);
+        assertThat(gradeListByCourseJava).extracting(GradeDto::getCourseName).allSatisfy(
+                s -> {
+                    assertThat(s).isEqualTo("JAVA");
+                }
+        );
+        assertThat(gradeListByCourseJava).extracting(GradeDto::getCourseName).containsOnly("JAVA");
+    }
+
+    @Test
+    void 성적_부여() {
+        long courseIdJava = 1L;
+        GradeEditDto johnDoe = new GradeEditDto(1L, 1L, "John Doe", 95, 85, 100);
+        gradeRepository.assignGrade(johnDoe);
+        List<GradeDto> list = gradeRepository.findAllGradeByCourseId(courseIdJava);
+        GradeDto johnDto = list.get(0);
+        assertThat(johnDto.getMidTermScore()).isEqualTo(95);
+        assertThat(johnDto.getFinalTermScore()).isEqualTo(85);
+        assertThat(johnDto.getReportScore()).isEqualTo(100);
+    }
+
+
 
 
 }

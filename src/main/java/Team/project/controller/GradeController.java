@@ -59,6 +59,7 @@ public class GradeController {
     }
 
     // 성적 수정 form 요청
+    // findDto는 수정할 학생의 성적 Dto임
     @GetMapping("/web/grades/{courseId}/students/{studentId}")
     public String editGradeForm(@PathVariable Long courseId, @PathVariable Long studentId, Model model){
         GradeEditDto findDto = assessmentService.findCourseGradeByCourseId(courseId, studentId);
