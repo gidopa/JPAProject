@@ -22,7 +22,7 @@ public class LoginServiceImpl implements LoginService{
 
     // 학생 로그인
     @Override
-    public void loginStudent(LoginDto loginDto, HttpServletRequest request) {
+    public LoginDto loginStudent(LoginDto loginDto, HttpServletRequest request) {
         Long hakbun = Long.valueOf(loginDto.getId());
 
         Student student = studentLoginRepository.findByHakbun(hakbun).orElse(null);
@@ -38,12 +38,12 @@ public class LoginServiceImpl implements LoginService{
 
         HttpSession session = request.getSession();
         session.setAttribute("loginDto", loginDto);
-
+        return loginDto;
     }
 
     // 교수 로그인
     @Override
-    public void loginProfessor(LoginDto loginDto, HttpServletRequest request) {
+    public LoginDto loginProfessor(LoginDto loginDto, HttpServletRequest request) {
         Long loginId = Long.valueOf(loginDto.getId());
 
         Professor professor = proLoginRepository.findByLoginId(loginId).orElse(null);
@@ -59,5 +59,7 @@ public class LoginServiceImpl implements LoginService{
 
         HttpSession session = request.getSession();
         session.setAttribute("loginDto", loginDto);
+
+        return loginDto;
     }
 }

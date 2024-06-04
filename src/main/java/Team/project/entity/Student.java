@@ -32,7 +32,7 @@ public class Student {
     @Embedded
     private Address address;
 
-    @OneToOne(mappedBy = "student")
+    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY)
     private Credit credit;
 
     @Embedded
@@ -46,6 +46,12 @@ public class Student {
         this.name = name;
         this.password = password;
         this.major = major;
+    }
+
+    public void updateStudent(String name, String password, String city, String street){
+        this.name = name;
+        this.password = password;
+        this.address.updateAddress(city, street);
     }
 }
 
