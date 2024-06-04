@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface ProLoginRepository extends JpaRepository<Professor, Long> {
 
     Optional<Professor> findByLoginId(Long loginId);
+
+    Optional<Professor> findByLoginIdAndId(Long loginId, Long id);
+
 }
