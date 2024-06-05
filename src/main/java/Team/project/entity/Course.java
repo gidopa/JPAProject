@@ -25,6 +25,7 @@ public class Course {
     private Professor professor;
 
     @OneToMany(mappedBy = "course")
+    @JsonIgnore
     private List<Enroll> enrollments;  // 추가: Course와 Enroll의 관계
 
     private double midTermWeight; // 중간고사 가중치

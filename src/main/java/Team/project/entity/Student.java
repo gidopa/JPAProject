@@ -1,5 +1,6 @@
 package Team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Student {
     private Major major;
 
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<Enroll> enrollments;
 
     @Embedded
