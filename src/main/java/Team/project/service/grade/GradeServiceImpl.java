@@ -3,6 +3,7 @@ package Team.project.service.grade;
 import Team.project.dto.grade.GradeDto;
 import Team.project.dto.grade.GradeEditDto;
 import Team.project.entity.Enroll;
+import Team.project.exception.GradeNotFoundException;
 import Team.project.repository.Enroll.EnrollRepository;
 import Team.project.repository.grade.GradeRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,16 @@ public class GradeServiceImpl implements GradeService{
 
     @Override
     public List<GradeDto> findAllGradeByStudentId(Long studentId) {
+        try {
+            List<GradeDto> gradeList = gradeRepository.findAllGradeByStudentId(studentId);
+            if (gradeList == null || gradeList.isEmpty()) {
+                throw new GradeNotFoundException("학생의 성적이 존재하지 않습니다 studentId:"+studentId);
+            }
+            return gradeList;
+        }catch (GradeNotFoundException e){
+            throw new GradeNotFoundException(e.getMessage());
+        }
 
-        return gradeRepository.findAllGradeByStudentId(studentId);
     }
 
     @Override
