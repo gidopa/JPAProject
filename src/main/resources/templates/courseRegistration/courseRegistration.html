@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head"></head>
+<body>
+<div th:replace="common/nav :: nav"></div>
+
+<!-- 수강신청 내용 -->
+<div class="container mt-5">
+    <h2>수강신청</h2>
+    <form th:action="@{/courseRegistration/register}" method="post">
+        <div class="mb-3">
+            <label for="studentId" class="form-label">학생 ID</label>
+            <input type="number" class="form-control" id="studentId" name="studentId" required>
+        </div>
+        <div class="mb-3">
+            <label for="courseId" class="form-label">강좌 ID</label>
+            <input type="number" class="form-control" id="courseId" name="courseId" required>
+        </div>
+        <button type="submit" class="btn btn-primary">수강신청</button>
+    </form>
+
+    <!-- 수강신청 결과 -->
+    <div th:if="${registrationResult != null}">
+        <div th:if="${registrationResult.success}">
+            <div class="alert alert-success mt-3">
+                <p th:text="${registrationResult.message}"></p>
+            </div>
+        </div>
+        <div th:if="${!registrationResult.success}">
+            <div class="alert alert-danger mt-3">
+                <p th:text="${registrationResult.message}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/footer :: span"></div>
+</body>
+</html>
