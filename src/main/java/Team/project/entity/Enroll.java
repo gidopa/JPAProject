@@ -36,6 +36,11 @@ public class Enroll {
         this.gradeType = gradeType;
     }
 
+    public Enroll(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+    }
+    
     public Enroll(Student student, Course course, GradeType gradeType) {
         this.student = student;
         this.course = course;
@@ -113,6 +118,14 @@ public class Enroll {
 
 
 
+    }
+
+    /* 연관관계 메서드 */
+    public void setCourseAndStudent(Course course, Student student){
+        this.course = course;
+        this.student = student;
+        course.getEnrollments().add(this);
+        student.getEnrollments().add(this);
     }
 
 

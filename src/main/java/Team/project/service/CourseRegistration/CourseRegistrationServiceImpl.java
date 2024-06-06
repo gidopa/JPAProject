@@ -1,18 +1,13 @@
 package Team.project.service.CourseRegistration;
-
 import Team.project.entity.Course;
+import Team.project.entity.Enroll;
 import Team.project.entity.Student;
-import Team.project.entity.CourseRegistration;
 import Team.project.repository.Course.CourseRepository;
 import Team.project.repository.CourseRegistration.CourseRegistrationRepository;
-import Team.project.repository.CourseRepository;
 import Team.project.repository.Student.StudentRepository;
-import Team.project.repository.StudentRepository;
-import Team.project.repository.CourseRegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.View;
 
 @Slf4j
 @Service
@@ -24,7 +19,7 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
     private final CourseRegistrationRepository courseRegistrationRepository;
 
     @Override
-    public CourseRegistration registerCourse(Long hakbun, Long courseId) throws Exception {
+    public Enroll registerCourse(Long hakbun, Long courseId) throws Exception {
         log.info("CourseRegistrationService. Hakbun: {}, CourseID: {}", hakbun, courseId);
 
         // 학생정보를 데이터베이스에서 조회
@@ -46,10 +41,8 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService 
         }
 
         // 수강신청 엔티티 생성 및 저장
-        CourseRegistration courseRegistration = new CourseRegistration();
-        courseRegistration.setStudent(student);
-        courseRegistration.setCourse(course);
+        Enroll enroll = new Enroll(student, course);
         log.info("Course registered successfully. Hakbun: {}, CourseID: {}", hakbun, courseId);
-        return courseRegistrationRepository.save(courseRegistration);
+        return courseRegistrationRepository.save(enroll);
     }
 }

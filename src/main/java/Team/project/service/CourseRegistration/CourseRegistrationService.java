@@ -1,9 +1,8 @@
 package Team.project.service.CourseRegistration;
 
-import Team.project.entity.Course;
-import Team.project.entity.CourseRegistration;
+import Team.project.entity.Enroll;
 
 public interface CourseRegistrationService {
 
-    CourseRegistration registerCourse(Long hakbun, Long courseId) throws Exception;
+    Enroll registerCourse(Long hakbun, Long courseId) throws Exception;
 }

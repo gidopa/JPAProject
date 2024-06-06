@@ -44,4 +44,21 @@ public class Course {
         this.credit = credit;
         this.category = category;
     }
+
+    /* 연관관계 메서드 */
+    public void setProfessor(Professor professor){
+        this.professor = professor;
+        professor.getCourses().add(this);
+    }
+
+    /* 생성자 */
+    public Course(String courseName, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo) {
+        this.courseName = courseName;
+        this.midTermWeight = midTermWeight;
+        this.finalTermWeight = finalTermWeight;
+        this.reportWeight = reportWeight;
+        this.credit = credit;
+        this.category = category;
+        this.semesterInfo = semesterInfo;
+    }
 }
