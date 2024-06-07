@@ -1,18 +1,33 @@
 package Team.project.controller;
 
+import Team.project.entity.Course;
 import Team.project.entity.Enroll;
+import Team.project.service.Course.CourseService;
 import Team.project.service.CourseRegistration.CourseRegistrationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
-@RestController
-@RequestMapping("/courseRegistration")
+@Controller
 @RequiredArgsConstructor
 public class CourseRegistrationController {
+
     private final CourseRegistrationService courseRegistrationService;
+    private final CourseService courseService;
+
+    @GetMapping("/courseRegistration")
+    public String courseRegistration(Model model) {
+
+        List<Course> courses = courseService.findAllCourses();
+        model.addAttribute("courses", courses);
+
+        return "courseRegistration/courseRegistration";
+    }
 
     @GetMapping("/register")
     public String registerCourse(@RequestParam Long hakbun, @RequestParam Long courseId, Model model) {
