@@ -22,7 +22,7 @@
             <div class="card">
                 <h6 class="text-center mb-4"><span class="text-danger"> *</span> : 수정 가능 항목</h6>
                 <form th:action="@{/web/professor/info/{id}(id=${infoDto.id})}" th:object="${infoDto}" method="post" class="form-card">
-
+                    <input type="hidden" th:field="*{hakbun}" th:value="*{hakbun}">
                     <!--이름, 비밀번호-->
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex">
