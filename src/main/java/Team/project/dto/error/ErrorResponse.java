@@ -16,5 +16,4 @@ public class ErrorResponse {
         this.stackTrace = stackTrace;
     }
 
-    // Getters and setters
 }
