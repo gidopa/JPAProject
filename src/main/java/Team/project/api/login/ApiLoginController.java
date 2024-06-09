@@ -18,6 +18,7 @@ public class ApiLoginController {
 
     private final LoginService loginService;
 
+    /* 로그인 처리 */
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDto loginDto,
                                 HttpServletRequest request) {
