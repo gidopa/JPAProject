@@ -1,5 +1,6 @@
 package Team.project.controller;
 
+import Team.project.dto.course.CourseDto;
 import Team.project.entity.Course;
 import Team.project.entity.Enroll;
 import Team.project.service.Course.CourseService;
@@ -23,13 +24,13 @@ public class CourseRegistrationController {
     @GetMapping("/courseRegistration")
     public String courseRegistration(Model model) {
 
-        List<Course> courses = courseService.findAllCourses();
+        List<CourseDto> courses = courseService.findAllCourses();
         model.addAttribute("courses", courses);
 
         return "courseRegistration/courseRegistration";
     }
 
-    @GetMapping("/register")
+    @PostMapping("/courseRegistration/register")
     public String registerCourse(@RequestParam Long hakbun, @RequestParam Long courseId, Model model) {
 
 
@@ -40,7 +41,7 @@ public class CourseRegistrationController {
             log.error("CourseRegistrationController : {}", e.getMessage());
             model.addAttribute("enrollmentResult", new RegistrationResult(false, e.getMessage()));
         }
-        return "courseRegistration/courseRegistration";
+        return "redirect:/";
     }
 }
 
