@@ -68,7 +68,7 @@ public class GradeController {
     }
 
     // 성적 부여 / 수정
-    @PostMapping("/web/grades/{courseId}/students/{studentId}")
+    @PostMapping("/web/grades/{courseId}/{studentId}")
     public String gradeListByProfessor(@Valid @ModelAttribute("findDto") GradeEditDto editDto, BindingResult bindingResult,
                                        @PathVariable Long courseId, Model model, @SessionAttribute LoginDto loginDto){
         if(bindingResult.hasErrors()){

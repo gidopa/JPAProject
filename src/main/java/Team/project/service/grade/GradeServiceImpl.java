@@ -3,6 +3,7 @@ package Team.project.service.grade;
 import Team.project.dto.grade.GradeDto;
 import Team.project.dto.grade.GradeEditDto;
 import Team.project.entity.Enroll;
+import Team.project.entity.Grade;
 import Team.project.exception.GradeNotFoundException;
 import Team.project.repository.Enroll.EnrollRepository;
 import Team.project.repository.grade.GradeRepository;
