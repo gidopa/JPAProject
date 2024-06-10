@@ -66,14 +66,5 @@ public class Course {
     }
 
 
-    /* 생성자 */
-    public Course(String courseName, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo) {
-        this.courseName = courseName;
-        this.midTermWeight = midTermWeight;
-        this.finalTermWeight = finalTermWeight;
-        this.reportWeight = reportWeight;
-        this.credit = credit;
-        this.category = category;
-        this.semesterInfo = semesterInfo;
-    }
 }
+
