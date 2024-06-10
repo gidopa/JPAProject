@@ -13,14 +13,24 @@ public class GradeDto {
 
     /*private Long studentId;
     private Long courseId;*/
-    private Student student;
-    private Course course;
+    private Long studentId;
+    private Long courseId;
+    private String studentName;
+    private String courseName;
+    private double midTermScore; // 중간고사 점수
+    private double finalTermScore; // 기말고사 점수
+    private double reportScore; // 레포트 점수
     private GradeType gradeType;
 
     @QueryProjection
-    public GradeDto(Student student, Course course, GradeType gradeType) {
-        this.student = student;
-        this.course = course;
+    public GradeDto(Long studentId, Long courseId,String studentName, String courseName, double midTermScore, double finalTermScore, double reportScore, GradeType gradeType) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+        this.studentName = studentName;
+        this.courseName = courseName;
+        this.midTermScore = midTermScore;
+        this.finalTermScore = finalTermScore;
+        this.reportScore = reportScore;
         this.gradeType = gradeType;
     }
 }

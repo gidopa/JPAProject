@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html th:replace="~{common/layoutFile :: layout(~{::title},~{::section})}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>메인 페이지 타이틀</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<section class="container mt-5">
+    <div class="container mt-3">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="courseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                과목 선택
+            </button>
+            <div class="dropdown-menu" aria-labelledby="courseDropdown">
+                <a class="dropdown-item" th:each="course : ${list}" th:text="${course.courseName}" th:href="|${course.id}|">과목 이름</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">학생 성적 관리</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>이름</th>
+                    <th>학과</th>
+                    <th>과목</th>
+                    <th>중간 고사</th>
+                    <th>기말 고사</th>
+                    <th>레포트</th>
+                    <th>학점</th>
+                    <th>수정</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="grade : ${allGrade}">
+                    <td th:text="${grade.studentName}">이름</td>
+                    <td th:text="${grade.major}">학과</td>
+                    <td th:text="${grade.courseName}">과목</td>
+                    <td th:text="${grade.midTermScore}">중간고사</td>
+                    <td th:text="${grade.finalTermScore}">기말 고사</td>
+                    <td th:text="${grade.reportScore}">레포트</td>
+                    <td th:text="${@enumUtil.getDisplayName(grade.gradeType)}">학점</td>
+                    <td>
+                        <button type="button"
+                                class="btn btn-primary btn-sm"
+                                th:onclick="|location.href='/editGrade/' + ${grade.courseId}|">
+                            수정
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
