@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head"></head>
+<body>
+<div th:replace="common/nav :: nav"></div>
+
+<!-- 수강신청 내용 -->
+<div class="container mt-5">
+    <h2>수강신청</h2>
+    <form th:action="@{/courseRegistration/register}" method="post">
+        <div class="mb-3">
+            <label for="hakbun" class="form-label">학생 ID</label>
+            <input type="number" class="form-control" id="hakbun" name="hakbun" required>
+        </div>
+        <div class="mb-3">
+            <label for="courseId" class="form-label">강의 ID</label>
+            <input type="number" class="form-control" id="courseId" name="courseId" required>
+        </div>
+        <button type="submit" class="btn btn-primary">수강신청</button>
+    </form>
+
+    <!-- 강의 리스트 -->
+    <div class="mt-5">
+        <h3>강의 리스트</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>강의 ID</th>
+                <th>강의명</th>
+                <th>교수님</th>
+                <th>학점</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.courseId}"></td>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${course.professor}"></td>
+                <td th:text="${course.credit}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 수강신청 결과 -->
+    <div th:if="${registrationResult != null}">
+        <div th:if="${registrationResult.success}">
+            <div class="alert alert-success mt-3">
+                <p th:text="${registrationResult.message}"></p>
+            </div>
+        </div>
+        <div th:if="${!registrationResult.success}">
+            <div class="alert alert-danger mt-3">
+                <p th:text="${registrationResult.message}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/footer :: span"></div>
+</body>
+</html>

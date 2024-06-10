@@ -22,6 +22,7 @@
             <div class="card">
                 <h6 class="text-center mb-4"><span class="text-danger"> *</span> : 수정 가능 항목</h6>
                 <form th:action="@{/web/student/info/{id}(id=${infoDto.id})}" th:object="${infoDto}" method="post" class="form-card">
+                    <input type="hidden" th:field="*{status}" th:value="*{status}">
 
                     <!--학번, 이름-->
                     <div class="row justify-content-between text-left">

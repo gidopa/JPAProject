@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -35,6 +34,19 @@ public class Enroll {
 
     public void setGradeType(GradeType gradeType) {
         this.gradeType = gradeType;
+    }
+
+    public Enroll(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+    }
+    
+    /* 연관관계 메서드 */
+    public void setCourseAndStudent(Course course, Student student){
+        this.course = course;
+        this.student = student;
+        course.getEnrollments().add(this);
+        student.getEnrollments().add(this);
     }
 
     public Enroll(Student student, Course course, GradeType gradeType) {
@@ -110,6 +122,7 @@ public class Enroll {
 
 
     }
+
 
 
 }

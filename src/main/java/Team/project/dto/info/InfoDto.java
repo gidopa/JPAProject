@@ -2,14 +2,12 @@ package Team.project.dto.info;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 public class InfoDto {
 
     private Long id;
@@ -32,7 +30,7 @@ public class InfoDto {
     private int semester;
     private String status;
 
-    public InfoDto(Long id, Long hakbun, String name, String password, String major, String city, String street) {
+    public InfoDto(Long id, Long hakbun, String name, String password, String major, String city, String street, int years, int semester) {
         this.id = id;
         this.hakbun = hakbun;
         this.name = name;
@@ -40,5 +38,19 @@ public class InfoDto {
         this.major = major;
         this.city = city;
         this.street = street;
+        this.years = years;
+        this.semester = semester;
     }
+
+    public InfoDto(Long id, Long loginId, String name, String password, String major, String city, String street) {
+        this.id = id;
+        this.hakbun = loginId;
+        this.name = name;
+        this.password = password;
+        this.major = major;
+        this.city = city;
+        this.street = street;
+    }
+
+
 }

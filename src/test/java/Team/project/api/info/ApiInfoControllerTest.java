@@ -4,6 +4,7 @@ import Team.project.dto.info.InfoDto;
 import Team.project.exception.InfoCustomException;
 import Team.project.service.info.InfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,9 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ActiveProfiles("test")
 @WebMvcTest(ApiInfoController.class)
@@ -34,8 +35,43 @@ class ApiInfoControllerTest {
     private InfoDto infoDto;
 
     @Test
-    @DisplayName("200 테스트")
-    void suceessUpdate() throws Exception{
+    @DisplayName("학생 정보 반환 200 테스트")
+    public void successInfo() throws Exception{
+        // given
+        Long id = 1L;
+
+        // when
+        Mockito.when(infoService.findStudent(Mockito.anyLong(), Mockito.any(HttpSession.class)))
+                .thenReturn(infoDto);
+
+        // then
+        mockMvc.perform(get("/student/info/"+id))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("학생 정보 반환 400 테스트")
+    public void badInfo() throws Exception{
+        // given
+        Long id = 1L;
+
+        // when
+        Mockito.when(infoService.findStudent(Mockito.anyLong(), Mockito.any(HttpSession.class)))
+                .thenThrow(new InfoCustomException("허용되지 않은 url 입니다."));
+
+        // then
+        mockMvc.perform(get("/student/info/"+id))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("허용되지 않은 url 입니다."))
+                .andExpect(jsonPath("$.status").value(400));
+    }
+
+
+
+    @Test
+    @DisplayName("학생 정보 수정 200 테스트")
+    void successUpdate() throws Exception{
         // given
         infoDto = new InfoDto();
         Long id = 1L;
@@ -58,7 +94,7 @@ class ApiInfoControllerTest {
     }
 
     @Test
-    @DisplayName("400 테스트")
+    @DisplayName("학생 정보 수정 400 테스트")
     public void badUpdate() throws Exception{
         // given
         infoDto = new InfoDto();
@@ -79,7 +115,9 @@ class ApiInfoControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(infoDto)))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("member id와 url id 가 일치하지 않습니다."));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("member id와 url id 가 일치하지 않습니다."))
+                .andExpect(jsonPath("$.status").value(400));
 
     }
 

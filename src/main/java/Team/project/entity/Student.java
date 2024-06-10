@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -40,8 +42,8 @@ public class Student {
     @Embedded
     private SemesterInfo semesterInfo;
 
-    @Enumerated(EnumType.STRING)
-    private StudentStatus status;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentHistory> studentHistories = new ArrayList<>();
 
     public Student(String name, Major major, Long hakbun,  String password) {
         this.hakbun = hakbun;
@@ -55,6 +57,16 @@ public class Student {
         this.password = password;
         this.address.updateAddress(city, street);
     }
+
+    /* 마지막 저장된 상태 조회 */
+    public StudentStatus getLastStatus(){
+        return studentHistories.stream()
+                .max(Comparator.comparing(StudentHistory::getId))
+                .map(StudentHistory::getNewStatus)
+                .orElse(StudentStatus.ENROLLED);
+    }
+
+
 }
 
 

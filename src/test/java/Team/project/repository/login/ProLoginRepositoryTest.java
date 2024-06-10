@@ -34,6 +34,23 @@ class ProLoginRepositoryTest {
             assertThat(professor.getLoginId()).isEqualTo(loginId);
             assertThat(professor.getId()).isEqualTo(2L);
         }
+    }
+
+    @Test
+    @DisplayName("교수 로그인 아이디, pk 로 조회")
+    public void findByLoginIdAndId() throws Exception{
+        // given
+        Long id = 1L;
+        Long loginId = 33330101L;
+        String name = "pro";
+
+        // when
+        Professor professor = proLoginRepository.findByLoginIdAndId(loginId, id).orElse(null);
+
+        // then
+        assertThat(professor.getLoginId()).isEqualTo(loginId);
+        assertThat(professor.getId()).isEqualTo(id);
+        assertThat(professor.getName()).isEqualTo(name);
 
     }
 }

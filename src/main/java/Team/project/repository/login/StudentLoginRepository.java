@@ -12,8 +12,9 @@ public interface StudentLoginRepository extends JpaRepository<Student, Long> {
     @EntityGraph(attributePaths = {"credit"})
     Optional<Student> findByHakbun(Long hakbun);
 
-    @Query("SELECT s FROM Student s JOIN FETCH s.major JOIN FETCH s.credit m WHERE s.id = :id")
+    @Query("SELECT s FROM Student s JOIN FETCH s.major m JOIN FETCH s.credit c WHERE s.id = :id")
     Optional<Student> findStudentById(Long id);
 
+    @EntityGraph(attributePaths = {"credit"})
     Optional<Student> findByHakbunAndId(Long hakbun, Long id);
 }
