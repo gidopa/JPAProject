@@ -1,9 +1,11 @@
-package Team.project.repository.Course;
+package Team.project.repository.course;
 
 import Team.project.entity.Course;
-import Team.project.repository.CourseRegistration.CourseRegistrationRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CourseRepository extends JpaRepository<Course, Long>, CourseRepositoryCustom {
+import java.util.List;
 
+public interface CourseRepository extends JpaRepository<Course, Long>, CourseRepositoryCustom {
+    List<Course> findAllByProfessorId(Long professorId);
+    Course findCourseById(Long courseId);
 }
