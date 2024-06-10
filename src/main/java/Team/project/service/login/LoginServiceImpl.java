@@ -22,42 +22,56 @@ public class LoginServiceImpl implements LoginService{
 
     // 학생 로그인
     @Override
-    public void loginStudent(LoginDto loginDto, HttpServletRequest request) {
+    public LoginDto loginStudent(LoginDto loginDto, HttpServletRequest request) {
         Long hakbun = Long.valueOf(loginDto.getId());
+        log.info("학생이 학번으로 로그인 시도 중 : {}", hakbun);
 
         Student student = studentLoginRepository.findByHakbun(hakbun).orElse(null);
 
         if(student == null){
+            log.warn("로그인 시도 실패 - 없는 ID: {}", hakbun);
             throw new LoginCustomException("없는 ID 입니다. 다시 확인해주세요");
         }
 
         if (!student.getPassword().equals(loginDto.getPassword())){
+            log.warn("로그인 시도 실패 - 학번: {}, 비밀번호 불일치", hakbun);
             throw new LoginCustomException("비밀번호가 일치하지 않습니다.");
         }
+
         loginDto.setStudentId(student.getId());
+        log.info("로그인 성공 - 학번: {}, 학생 PK: {}", hakbun, student.getId());
 
         HttpSession session = request.getSession();
         session.setAttribute("loginDto", loginDto);
+        log.info("세션 생성 - 학번: {}, 세션 ID: {}", hakbun, session.getId());
 
+        return loginDto;
     }
 
     // 교수 로그인
     @Override
-    public void loginProfessor(LoginDto loginDto, HttpServletRequest request) {
+    public LoginDto loginProfessor(LoginDto loginDto, HttpServletRequest request) {
         Long loginId = Long.valueOf(loginDto.getId());
+        log.info("교수 로그인 시도 중 : {}", loginId);
 
         Professor professor = proLoginRepository.findByLoginId(loginId).orElse(null);
 
         if(professor == null){
+            log.warn("로그인 시도 실패 - 없는 ID: {}", loginId);
             throw new LoginCustomException("없는 ID 입니다. 다시 확인해주세요");
         }
 
         if(!professor.getPassword().equals(loginDto.getPassword())){
+            log.warn("로그인 시도 실패 - 로그인 ID: {}, 비밀번호 불일치", loginId);
             throw new LoginCustomException("비밀번호가 일치하지 않습니다.");
         }
         loginDto.setProfessorId(professor.getId());
+        log.info("로그인 성공 - 로그인 ID: {}, 교수 PK: {}", loginId, professor.getId());
 
         HttpSession session = request.getSession();
         session.setAttribute("loginDto", loginDto);
+        log.info("세션 생성 - 학번: {}, 세션 ID: {}", loginId, session.getId());
+
+        return loginDto;
     }
 }

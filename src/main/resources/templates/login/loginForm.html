@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/head :: head"></head>
+<head th:insert="~{common/head :: head}"></head>
 <link href="/login/style.css" rel="stylesheet" />
 
 <div th:if="${errorMessage}">
@@ -10,14 +10,14 @@
 </div>
 
 <body>
-<div th:replace="common/nav :: nav"></div>
-<div th:replace="common/nav :: section"></div>
+<div th:insert="~{common/nav :: nav}"></div>
+<div th:insert="~{common/nav :: section}"></div>
 
 <div class="login-wrap">
     <div class="login-html">
         <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
         <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
-        <form action="/login" th:object="${loginDto}" method="post" class="login-form">
+        <form action="/web/login" th:object="${loginDto}" method="post" class="login-form">
             <div class="sign-in-htm">
                 <div class="group">
                     <label th:for="id" class="label">Id</label>
@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div th:replace="common/footer :: span"></div>
+<div th:insert="~{common/footer :: span}"></div>
 
 </body>
 </html>

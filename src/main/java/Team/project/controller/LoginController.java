@@ -23,14 +23,16 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login")
+    /* 로그인 뷰 */
+    @GetMapping("/web/login")
     public String login(Model model){
         model.addAttribute("loginDto", new LoginDto());
 
         return "login/loginForm";
     }
 
-    @PostMapping("/login")
+    /* 로그인 처리 */
+    @PostMapping("/web/login")
     public String login(@Valid LoginDto loginDto, BindingResult result, HttpServletRequest request){
         if(result.hasErrors()){
             return "login/loginForm";
@@ -46,6 +48,7 @@ public class LoginController {
         return "redirect:/";
     }
 
+    /* 로그아웃 처리 */
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -55,9 +58,10 @@ public class LoginController {
     }
 
 
+    /* 예외 처리 */
     @ExceptionHandler(LoginCustomException.class)
     public String LoginException(LoginCustomException ex, RedirectAttributes redirect){
         redirect.addFlashAttribute("errorMessage", ex.getMessage());
-        return "redirect:/login";
+        return "redirect:/web/login";
     }
 }

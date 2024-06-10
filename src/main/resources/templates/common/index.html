@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/head :: head"></head>
+<head th:insert="~{common/head :: head}"></head>
 <link href="/login/style.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <body>
 <div th:insert="~{common/nav :: nav}"></div>
@@ -9,7 +10,7 @@
 
 <!--Contents 영역-->
 
-<div th:replace="common/footer :: span"></div>
+<div th:insert="~{common/footer :: span}"></div>
 
 </body>
 </html>
