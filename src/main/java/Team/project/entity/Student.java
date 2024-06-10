@@ -31,7 +31,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore
-    private List<Enroll> enrollments;
+    private List<Enroll> enrollments = new ArrayList<>();
 
     @Embedded
     private Address address;
