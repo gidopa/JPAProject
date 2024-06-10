@@ -1,32 +1,69 @@
 -- Major 데이터 삽입
-INSERT INTO Major (major_id, name) VALUES (1, '경영학과'), (2, '컴퓨터공학');
+INSERT INTO Major ( major_id, name) VALUES ( 2,'경영학과'), ( 1,'컴퓨터공학');
+
+-- Student 데이터 삽입
+INSERT INTO student (student_id, hakbun, name, password, major_id, city, street,  years, semester)
+VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 2024, 2),
+       (2, 20000102, 'Kim Wongi', 'password124', 2, 'Cityville', '123 Main St',  2024, 2),
+       (3, 20240103, 'student3', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (4, 20240104, 'student4', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (5, 20240105, 'student5', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (6, 20240106, 'student6', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (7, 20240107, 'student7', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (8, 20240108, 'student8', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (10, 20240109, 'student10', 'password125', 1, 'Cityville', '123 Main St',  2024, 2),
+       (9, 20240110, 'student9', 'password125', 1, 'Cityville', '123 Main St',  2024, 2);
+
+-- StudentHistory 데이터 삽입
+INSERT INTO student_history (student_history_id, student_id, old_Status, new_Status)
+VALUES (1, 1, 'ENROLLED', 'ENROLLED'),
+       (2, 2, 'ENROLLED', 'ENROLLED'),
+       (3, 3, 'ENROLLED', 'ENROLLED'),
+       (4, 4, 'ENROLLED', 'ENROLLED'),
+       (5, 5, 'ENROLLED', 'ENROLLED'),
+       (6, 6, 'ENROLLED', 'ONLEAVE'),
+       (7, 1, 'ENROLLED', 'ONLEAVE');
 
 -- Credit 데이터 삽입
-INSERT INTO Credit (credit_id, credit) VALUES (1, 4.0), (2, 1.8), (3, 2.0);
---
----- Student 데이터 삽입
-INSERT INTO Student (student_id, hakbun, name, password, major_id, city, street, credit_id, years, semester, status)
-VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 1, 2024, 2, 'ENROLLED'),
-(2, 20000102, 'Kim Wongi', 'password124', 2, 'Cityville', '123 Main St', 2, 2024, 2, 'ENROLLED'),
-(3, 20240101, 'Wongi Kim', 'password125', 1, 'Cityville', '123 Main St', 3, 2024, 2, 'ENROLLED');
+INSERT INTO Credit (credit_id,student_id, credit) VALUES (1, 1,4.0), (2, 2,1.8), (3, 3,2.0);
 
-INSERT INTO Professor(professor_id, login_id, password, name, city, street, major_id)
+-- Professor 데이터 삽입
+INSERT INTO Professor (professor_id, login_id, password, name, city, street, major_id)
 VALUES (1, 33330101, 'password123', 'pro', 'Cityville', '123 Main St', 1),
-(2, 33330102, 'password124', 'pro2', 'Cityville', '123 Main St', 1);
+       (2, 33330102, 'password124', 'pro2', 'Cityville', '123 Main St', 1);
 
---VALUES (3, 20000103, 'Gido', 'password125', 1, 'Cityville', '123 Main St', 1, 2024, 2, 'ENROLLED'),
---VALUES (4, 20000104, 'Wonbo', 'password126', 1, 'Cityville', '123 Main St', 1, 2024, 2, 'ENROLLED'),
---VALUES (5, 20000105, 'Wongi', 'password127', 1, 'Cityville', '123 Main St', 1, 2024, 2, 'ENROLLED'),
+-- Course 데이터 삽입
+insert into course (credit, mid_term_weight, final_term_weight, report_weight, course_id, professor_id, course_name)
+values ( 3,0.3,0.3,0.4, 1, 1,'JAVA'),
+       (3,0.4,0.4,0.2,2,2,'Python');
+
+-- Enroll 데이터 삽입
+insert into enroll (course_id, enroll_id, student_id, grade_type)
+values ( 1, 1,1, 'APLUS'),
+       ( 1, 2,2, 'BPLUS'),
+       ( 1, 3,3, 'AZERO'),
+       ( 1, 4,4, 'CPLUS'),
+       ( 1, 5,5, 'APLUS'),
+       ( 1, 6,6, 'APLUS'),
+       ( 1, 7,7, 'APLUS'),
+       ( 1, 8,8, 'APLUS'),
+       ( 1, 9,9, 'APLUS'),
+       ( 1, 10,10, 'APLUS'),
+       (2,11,1,'APLUS');
+
+insert into assessment (enroll_id, assessment_id, mid_term_score, final_term_score, report_score, total_score)
+values ( 1,1,90,90,90 ,270),
+       ( 2,2,90,95,90,275 ),
+       ( 3,3,91,96,90 ,277),
+       ( 4,4,92,93,90,275 ),
+       ( 5,5,93,91,90,null ),
+       ( 6,6,94,97,90,null ),
+       ( 7,7,95,96,90,null ),
+       ( 8,8,96,93,90 ,null),
+       ( 9,9,97,94,90,null),
+       ( 10,10,98,97,90 ,null),
+       ( 11,11,98,97,90 ,null);
 
 
---INSERT INTO Student (hakbun, name, password, major_id, city, street, credit_id, years, semester, status) VALUES
---(20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 1, 2023, 1, 'ACTIVE'),
---(20010102, 'Jane Smith', 'password456', 2, 'Townsville', '456 Elm St', 2, 2022, 2, 'INACTIVE'),
---(20020103, 'Alice Johnson', 'password789', 3, 'Villagetown', '789 Oak St', 3, 2021, 1, 'ACTIVE'),
---(20030104, 'Bob Brown', 'password101', 4, 'Hamlet', '321 Pine St', 4, 2020, 2, 'INACTIVE'),
---(20040105, 'Charlie Davis', 'password202', 1, 'Metropolis', '654 Maple St', 1, 2019, 1, 'ACTIVE'),
---(20050106, 'Diana Evans', 'password303', 2, 'Smallville', '987 Cedar St', 2, 2018, 2, 'INACTIVE'),
---(20060107, 'Eve Harris', 'password404', 3, 'Lakeside', '432 Birch St', 3, 2017, 1, 'ACTIVE'),
---(20070108, 'Frank Green', 'password505', 4, 'Mountainview', '876 Spruce St', 4, 2016, 2, 'INACTIVE'),
---(20080109, 'Grace Lee', 'password606', 1, 'Rivertown', '543 Ash St', 1, 2015, 1, 'ACTIVE'),
---(20090110, 'Hank Miller', 'password707', 2, 'Seaside', '210 Redwood St', 2, 2014, 2, 'INACTIVE');
+
+
