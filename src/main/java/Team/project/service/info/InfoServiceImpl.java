@@ -44,7 +44,7 @@ public class InfoServiceImpl implements InfoService{
         }
 
         InfoDto infoDto = new InfoDto(student.getId(), student.getHakbun(), student.getName(), student.getPassword(), student.getMajor().getName(), student.getAddress().getCity(),
-                student.getAddress().getStreet(), student.getSemesterInfo().getYears(), student.getSemesterInfo().getSemester(), student.getStatus().name());
+                student.getAddress().getStreet(), student.getSemesterInfo().getYears(), student.getSemesterInfo().getSemester());
         log.info("조회 성공 - InfoDto: {}", infoDto);
 
         return infoDto;
