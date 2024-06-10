@@ -13,7 +13,7 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
     private Long id;
     private String courseName;
@@ -66,4 +66,14 @@ public class Course {
     }
 
 
+    /* 생성자 */
+    public Course(String courseName, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo) {
+        this.courseName = courseName;
+        this.midTermWeight = midTermWeight;
+        this.finalTermWeight = finalTermWeight;
+        this.reportWeight = reportWeight;
+        this.credit = credit;
+        this.category = category;
+        this.semesterInfo = semesterInfo;
+    }
 }
