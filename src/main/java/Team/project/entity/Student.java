@@ -34,7 +34,7 @@ public class Student {
     @Embedded
     private Address address;
 
-    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Credit credit;
 
     @Embedded
