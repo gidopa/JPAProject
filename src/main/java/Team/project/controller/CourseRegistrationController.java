@@ -41,7 +41,7 @@ public class CourseRegistrationController {
             log.error("CourseRegistrationController : {}", e.getMessage());
             model.addAttribute("enrollmentResult", new RegistrationResult(false, e.getMessage()));
         }
-        return "redirect:/";
+        return "redirect:/courseRegistration";
     }
 }
 
