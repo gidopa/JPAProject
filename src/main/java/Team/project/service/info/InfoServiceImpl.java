@@ -44,8 +44,8 @@ public class InfoServiceImpl implements InfoService{
         }
 
         InfoDto infoDto = new InfoDto(student.getId(), student.getHakbun(), student.getName(), student.getPassword(), student.getMajor().getName(), student.getAddress().getCity(),
-                student.getAddress().getStreet(), student.getSemesterInfo().getYears(), student.getSemesterInfo().getSemester(), student.getStatus().name());
-        log.info("조회 성공 - InfoDto: {}", infoDto);
+                student.getAddress().getStreet(), student.getSemesterInfo().getYears(), student.getSemesterInfo().getSemester());
+
 
         return infoDto;
     }
@@ -72,7 +72,6 @@ public class InfoServiceImpl implements InfoService{
         }
 
         InfoDto infoDto = new InfoDto(professor.getId(), professor.getLoginId(), professor.getName(), professor.getPassword(), professor.getMajor().getName(), professor.getAddress().getCity(), professor.getAddress().getStreet());
-        log.info("조회 성공 - InfoDto: {}", infoDto);
 
         return infoDto;
     }
@@ -81,8 +80,7 @@ public class InfoServiceImpl implements InfoService{
     @Override
     @Transactional
     public InfoDto studentUpdate(Long id, InfoDto infoDto) {
-        log.info("학생 정보 변경 시도 중 - infoDto: {}", infoDto);
-        
+
         if(id != infoDto.getId()){
             log.warn("Uri / infoDto.id 불일치 - Uri.id: {}, infoDto.id: {}", id, infoDto.getId());
             throw new InfoCustomException("member id와 url id 가 일치하지 않습니다.");
@@ -101,8 +99,6 @@ public class InfoServiceImpl implements InfoService{
         infoDto.setCity(student.getAddress().getCity());
         infoDto.setStreet(student.getAddress().getStreet());
 
-        log.info("학생 정보 수정 성공 - infoDto: {}", infoDto);
-
         return infoDto;
     }
 
@@ -110,7 +106,6 @@ public class InfoServiceImpl implements InfoService{
     @Override
     @Transactional
     public InfoDto professorUpdate(Long id, InfoDto infoDto) {
-        log.info("교수 정보 변경 시도 중 - infoDto: {}", infoDto);
 
         if(id != infoDto.getId()){
             log.warn("Uri / infoDto.id 불일치 - Uri.id: {}, infoDto.id: {}", id, infoDto.getId());
@@ -130,8 +125,6 @@ public class InfoServiceImpl implements InfoService{
         infoDto.setPassword(professor.getPassword());
         infoDto.setCity(professor.getAddress().getCity());
         infoDto.setStreet(professor.getAddress().getStreet());
-
-        log.info("교수 정보 수정 성공 - infoDto: {}", infoDto);
 
         return infoDto;
     }

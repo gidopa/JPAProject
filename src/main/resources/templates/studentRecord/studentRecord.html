@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<head th:insert="~{common/head :: head}"></head>
+
+
+<body>
+<div th:insert="~{common/nav :: nav}"></div>
+<div th:insert="~{common/nav :: section}"></div>
+
+<h4> 학생 정보 </h4>
+<br>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>학번</th>
+        <th>이름</th>
+        <th>학년</th>
+        <th>학기</th>
+        <th>전공</th>
+        <th>비밀번호</th>
+        <th>주소</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${infoDto.hakbun}">학번</td>
+        <td th:text="${infoDto.name}">이름</td>
+        <td th:text="${infoDto.years}">학년</td>
+        <td th:text="${infoDto.semester}">학기</td>
+        <td th:text="${infoDto.major}">전공</td>
+        <td th:text="${infoDto.password}">비밀번호</td>
+        <td th:text="${infoDto.city + ' ' + infoDto.street}">주소</td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br><br><br>
+
+<h4> 학생 상태 변경 테이블</h4>
+<br>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">학번</th>
+        <th scope="col">학생 이름</th>
+        <th scope="col">Old_Status</th>
+        <th scope="col">New_Status</th>
+        <th scope="col">Updated_Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="history : ${studentHistoryDto}">
+        <td th:text="${history.hakbun}">학번</td>
+        <td th:text="${history.name}">학생 이름</td>
+        <td th:text="${history.old_status}">Old Status</td>
+        <td th:text="${history.new_status}">New Status</td>
+        <td th:text="${history.updated_date}">Updated Date</td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br><br><br>
+
+<h4> 학생 성적 </h4>
+<br>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>학생 이름</th>
+        <th>과목</th>
+        <th>중간고사</th>
+        <th>기말고사</th>
+        <th>레포트점수</th>
+        <th>학점</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="grade : ${gradeDto}">
+        <td th:text="${grade.studentName}">학생 이름</td>
+        <td th:text="${grade.courseName}">과목</td>
+        <td th:text="${grade.midTermScore}">중간고사</td>
+        <td th:text="${grade.finalTermScore}">기말고사</td>
+        <td th:text="${grade.reportScore}">레포트 점수</td>
+        <td th:text="${@enumUtil.getDisplayName(grade.gradeType)}">학점</td>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+        <td th:text="${studentCreditDto.credit} + ' / 4.5'"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+<div th:insert="~{common/footer :: span}"></div>
+
+</body>
+</html>

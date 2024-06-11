@@ -1,17 +1,15 @@
 package Team.project.controller;
 
-import Team.project.dto.course.CourseDto;
-import Team.project.entity.Course;
 import Team.project.entity.Enroll;
-import Team.project.service.Course.CourseService;
 import Team.project.service.CourseRegistration.CourseRegistrationService;
+import Team.project.service.course.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -24,8 +22,8 @@ public class CourseRegistrationController {
     @GetMapping("/courseRegistration")
     public String courseRegistration(Model model) {
 
-        List<CourseDto> courses = courseService.findAllCourses();
-        model.addAttribute("courses", courses);
+//        List<CourseDto> courses = courseService.findAllCourses();
+//        model.addAttribute("courses", courses);
 
         return "courseRegistration/courseRegistration";
     }

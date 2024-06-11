@@ -36,7 +36,7 @@ public class GradeController {
 
 
     // 학생이 학번으로 로그인 한 후 자신의 성적 조회
-    @GetMapping("/grades/students")
+    @GetMapping("/web/grades/students")
     public String allGrades(Model model, @SessionAttribute LoginDto loginDto) {
         String id = loginDto.getId();
         long hakbun = Long.parseLong(id);
@@ -68,7 +68,7 @@ public class GradeController {
     }
 
     // 성적 부여 / 수정
-    @PostMapping("/web/grades/{courseId}/students/{studentId}")
+    @PostMapping("/web/grades/{courseId}/{studentId}")
     public String gradeListByProfessor(@Valid @ModelAttribute("findDto") GradeEditDto editDto, BindingResult bindingResult,
                                        @PathVariable Long courseId, Model model, @SessionAttribute LoginDto loginDto){
         if(bindingResult.hasErrors()){
