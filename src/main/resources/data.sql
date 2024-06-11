@@ -15,14 +15,14 @@ VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 2
        (9, 20240110, 'student9', 'password125', 1, 'Cityville', '123 Main St',  2024, 2);
 
 -- StudentHistory 데이터 삽입
-INSERT INTO student_history (student_history_id, student_id, old_Status, new_Status)
-VALUES (1, 1, 'ENROLLED', 'ENROLLED'),
-       (2, 2, 'ENROLLED', 'ENROLLED'),
-       (3, 3, 'ENROLLED', 'ENROLLED'),
-       (4, 4, 'ENROLLED', 'ENROLLED'),
-       (5, 5, 'ENROLLED', 'ENROLLED'),
-       (6, 6, 'ENROLLED', 'ONLEAVE'),
-       (7, 1, 'ENROLLED', 'ONLEAVE');
+INSERT INTO student_history (student_history_id, student_id, old_Status, new_Status, updated_date)
+VALUES (1, 1, 'ENROLLED', 'ENROLLED', '2023-01-01'),
+       (2, 2, 'ENROLLED', 'ENROLLED', '2023-01-02'),
+       (3, 3, 'ENROLLED', 'ENROLLED', '2023-01-03'),
+       (4, 4, 'ENROLLED', 'ENROLLED', '2023-01-04'),
+       (5, 5, 'ENROLLED', 'ENROLLED', '2023-01-05'),
+       (6, 6, 'ENROLLED', 'ONLEAVE', '2023-01-06'),
+       (7, 1, 'ENROLLED', 'ONLEAVE', '2023-02-01');
 
 -- Credit 데이터 삽입
 INSERT INTO Credit (credit_id,student_id, credit) VALUES (1, 1,4.0), (2, 2,1.8), (3, 3,2.0);
