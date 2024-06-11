@@ -1,9 +1,10 @@
-package Team.project.service.course;
+package Team.project.service.Course;
 
+import Team.project.dto.course.CourseDto;
 import Team.project.entity.Course;
 
 import java.util.List;
 
 public interface CourseService {
-    List<Course> findAllByProfessorId(Long professorId);
+    List<CourseDto> findAllCourses();
 }

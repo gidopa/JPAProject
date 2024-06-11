@@ -29,6 +29,8 @@
                 <th>강의명</th>
                 <th>교수님</th>
                 <th>학점</th>
+                <th>연도</th>
+                <th>학기</th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +39,8 @@
                 <td th:text="${course.courseName}"></td>
                 <td th:text="${course.professor}"></td>
                 <td th:text="${course.credit}"></td>
+                <td th:text="${course.year}"></td>
+                <td th:text="${course.semester}"></td>
             </tr>
             </tbody>
         </table>
