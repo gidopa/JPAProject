@@ -4,5 +4,5 @@ import Team.project.dto.student.StudentHistoryDto;
 
 public interface StudentHistoryRepositoryCustom {
 
-    void updateEnrollments(StudentHistoryDto studentHistoryDto);
+    StudentHistoryDto updateEnrollments(StudentHistoryDto studentHistoryDto);
 }

@@ -13,8 +13,8 @@ public class StudentHistoryServiceImpl implements StudentHistoryService{
     private final StudentHistoryRepository studentHistoryRepository;
 
     @Override
-    public void updateEnrollments(StudentHistoryDto studentHistoryDto) {
-        studentHistoryRepository.updateEnrollments(studentHistoryDto);
+    public StudentHistoryDto updateEnrollments(StudentHistoryDto studentHistoryDto) {
+       return studentHistoryRepository.updateEnrollments(studentHistoryDto);
     }
 
 }

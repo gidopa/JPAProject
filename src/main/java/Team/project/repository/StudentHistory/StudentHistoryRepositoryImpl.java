@@ -29,7 +29,7 @@ public class StudentHistoryRepositoryImpl implements StudentHistoryRepositoryCus
 
     @Override
     @Transactional
-    public void updateEnrollments(StudentHistoryDto studentHistoryDto) {
+    public StudentHistoryDto updateEnrollments(StudentHistoryDto studentHistoryDto) {
         Long studentId = studentHistoryDto.getStudentId();
         Optional<Student> findStudent = studentService.findById(studentId);
         findStudent.ifPresentOrElse(
@@ -48,6 +48,7 @@ public class StudentHistoryRepositoryImpl implements StudentHistoryRepositoryCus
                     throw new IllegalArgumentException("Student Not Found");
                 }
         );
+        return studentHistoryDto;
 
     }
 }
