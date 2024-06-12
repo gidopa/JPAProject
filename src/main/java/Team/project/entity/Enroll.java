@@ -14,7 +14,7 @@ import java.util.List;
 public class Enroll {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // 전략 설정
     @Column(name = "enroll_id")
     private Long id;
 

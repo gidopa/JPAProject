@@ -47,16 +47,14 @@
     </div>
 
     <!-- 수강신청 결과 -->
-    <div th:if="${registrationResult != null}">
-        <div th:if="${registrationResult.success}">
-            <div class="alert alert-success mt-3">
-                <p th:text="${registrationResult.message}"></p>
-            </div>
+    <div th:if="${enrollmentResult != null}">
+        <div th:if="${enrollmentResult.contains('완료')}"
+             class="alert alert-success mt-3">
+            <p th:text="${enrollmentResult}"></p>
         </div>
-        <div th:if="${!registrationResult.success}">
-            <div class="alert alert-danger mt-3">
-                <p th:text="${registrationResult.message}"></p>
-            </div>
+        <div th:if="${enrollmentResult.contains('실패')}"
+             class="alert alert-danger mt-3">
+            <p th:text="${enrollmentResult}"></p>
         </div>
     </div>
 </div>
