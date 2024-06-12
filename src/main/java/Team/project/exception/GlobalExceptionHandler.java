@@ -38,6 +38,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 */
+
+    @ExceptionHandler(NoStateChangeException.class)
+    public ResponseEntity<?> handleNoStateChangeException(NoStateChangeException ex) {
+        StringBuilder details = new StringBuilder();
+        for (StackTraceElement element : ex.getStackTrace()) {
+            details.append(element.toString()).append("\n");
+        }
+        ErrorDetails errorResponse = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), details.toString());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
+
     @ExceptionHandler(AssignGradeNotFoundException.class)
     public ResponseEntity<?> handleAssignGradeNotFoundException(AssignGradeNotFoundException ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getStackTrace());
