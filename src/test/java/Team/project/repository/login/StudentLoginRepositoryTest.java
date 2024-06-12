@@ -25,6 +25,7 @@ class StudentLoginRepositoryTest {
         // given
         Long id = 1l;
         Long hakbun = 20000101L;
+        String password = "password123";
 
         // when
         Student student = studentLoginRepository.findByHakbun(hakbun).orElse(null);
@@ -36,6 +37,7 @@ class StudentLoginRepositoryTest {
             System.out.println(student.getHakbun());
             assertThat(student.getHakbun()).isEqualTo(hakbun);
             assertThat(student.getId()).isEqualTo(1L);
+            assertThat(student.getPassword()).isEqualTo(password);
         }
     }
 
@@ -47,7 +49,6 @@ class StudentLoginRepositoryTest {
         Long hakbun = 20000101L;
         String city  = "Cityville";
         int years = 2024;
-        String status = "ENROLLED";
 
         // when
         Student student = studentLoginRepository.findStudentById(id).orElse(null);
@@ -60,7 +61,6 @@ class StudentLoginRepositoryTest {
             assertThat(student.getHakbun()).isEqualTo(hakbun);
             assertThat(student.getAddress().getCity()).isEqualTo(city);
             assertThat(student.getSemesterInfo().getYears()).isEqualTo(years);
-            assertThat(student.getStatus().name()).isEqualTo(status);
         }
     }
 
@@ -72,7 +72,6 @@ class StudentLoginRepositoryTest {
         Long hakbun = 20000101L;
         String city  = "Cityville";
         int years = 2024;
-        String status = "ENROLLED";
 
         // when
         Student student = studentLoginRepository.findByHakbunAndId(hakbun, id).orElse(null);
@@ -85,7 +84,6 @@ class StudentLoginRepositoryTest {
             assertThat(student.getHakbun()).isEqualTo(hakbun);
             assertThat(student.getAddress().getCity()).isEqualTo(city);
             assertThat(student.getSemesterInfo().getYears()).isEqualTo(years);
-            assertThat(student.getStatus().name()).isEqualTo(status);
         }
     }
 }

@@ -1,6 +1,7 @@
 package Team.project.api.info;
 
 import Team.project.dto.info.InfoDto;
+import Team.project.dto.login.LoginDto;
 import Team.project.exception.InfoCustomException;
 import Team.project.service.info.InfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -32,25 +34,35 @@ class ApiInfoControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private InfoDto infoDto;
 
     @Test
-    @DisplayName("학생 정보 반환 200 테스트")
+    @DisplayName("학생 정보 반환 - 200 테스트")
     public void successInfo() throws Exception{
         // given
-        Long id = 1L;
+        MockHttpSession session = new MockHttpSession();
+        LoginDto loginDto = new LoginDto();
+        loginDto.setId("20000101");
+        loginDto.setStudentId(1L);
+        session.setAttribute("loginDto", loginDto);
 
-        // when
+        InfoDto infoDto = new InfoDto(1L, 20000101L, "John Doe", "password123", "컴퓨터공학", "Cityville", "123 Main St", 2024, 2);
+
         Mockito.when(infoService.findStudent(Mockito.anyLong(), Mockito.any(HttpSession.class)))
                 .thenReturn(infoDto);
 
-        // then
-        mockMvc.perform(get("/student/info/"+id))
-                .andExpect(status().isOk());
+
+        // when & then
+        mockMvc.perform(get("/student/info/1")
+                .session(session))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.hakbun").value(20000101L))
+                .andExpect(jsonPath("$.name").value("John Doe"))
+                .andExpect(jsonPath("$.major").value("컴퓨터공학"));
     }
 
     @Test
-    @DisplayName("학생 정보 반환 400 테스트")
+    @DisplayName("학생 정보 반환 - 400 테스트")
     public void badInfo() throws Exception{
         // given
         Long id = 1L;
@@ -73,8 +85,9 @@ class ApiInfoControllerTest {
     @DisplayName("학생 정보 수정 200 테스트")
     void successUpdate() throws Exception{
         // given
-        infoDto = new InfoDto();
         Long id = 1L;
+
+        InfoDto infoDto = new InfoDto();
         infoDto.setId(id);
         infoDto.setHakbun(20000101L);
         infoDto.setName("Come");
@@ -90,15 +103,18 @@ class ApiInfoControllerTest {
         mockMvc.perform(patch("/student/info/" + id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(infoDto)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Come"))
+                .andExpect(jsonPath("$.password").value("a b c"));
     }
 
     @Test
-    @DisplayName("학생 정보 수정 400 테스트")
+    @DisplayName("학생 정보 수정 - 400 테스트")
     public void badUpdate() throws Exception{
         // given
-        infoDto = new InfoDto();
         Long id = 1L;
+
+        InfoDto infoDto = new InfoDto();
         infoDto.setId(2L);
         infoDto.setHakbun(20000101L);
         infoDto.setName("Come");
@@ -120,8 +136,6 @@ class ApiInfoControllerTest {
                 .andExpect(jsonPath("$.status").value(400));
 
     }
-
-
 
 
 }

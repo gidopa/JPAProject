@@ -38,18 +38,18 @@ values ( 3,0.3,0.3,0.4, 1, 1,'JAVA'),
        (3,0.4,0.4,0.2,2,2,'Python');
 
 -- Enroll 데이터 삽입
-insert into enroll (course_id, enroll_id, student_id, grade_type)
-values ( 1, 1,1, 'APLUS'),
-       ( 1, 2,2, 'BPLUS'),
-       ( 1, 3,3, 'AZERO'),
-       ( 1, 4,4, 'CPLUS'),
-       ( 1, 5,5, 'APLUS'),
-       ( 1, 6,6, 'APLUS'),
-       ( 1, 7,7, 'APLUS'),
-       ( 1, 8,8, 'APLUS'),
-       ( 1, 9,9, 'APLUS'),
-       ( 1, 10,10, 'APLUS'),
-       (2,11,1,'APLUS');
+insert into enroll (course_id, student_id, grade_type)
+values (1, 1, 'APLUS'),
+       (1, 2, 'BPLUS'),
+       (1, 3, 'AZERO'),
+       (1, 4, 'CPLUS'),
+       (1, 5, 'APLUS'),
+       (1, 6, 'APLUS'),
+       (1, 7, 'APLUS'),
+       (1, 8, 'APLUS'),
+       (1, 9, 'APLUS'),
+       (1, 10, 'APLUS'),
+       (2, 1, 'APLUS');
 
 insert into assessment (enroll_id, assessment_id, mid_term_score, final_term_score, report_score, total_score)
 values ( 1,1,90,90,90 ,270),

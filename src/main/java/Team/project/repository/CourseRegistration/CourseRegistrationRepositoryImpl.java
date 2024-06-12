@@ -1,9 +1,6 @@
 package Team.project.repository.CourseRegistration;
 
-import Team.project.entity.Course;
-import Team.project.entity.Enroll;
-import Team.project.entity.QEnroll;
-import Team.project.entity.Student;
+import Team.project.entity.*;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;

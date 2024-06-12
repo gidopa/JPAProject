@@ -17,8 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ActiveProfiles("test")
 @WebMvcTest(ApiLoginController.class)
@@ -33,29 +32,35 @@ class ApiLoginControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private LoginDto loginDto;
 
     @Test
-    @DisplayName("200 테스트")
+    @DisplayName("학생 로그인 성공 테스트")
     void loginSuccess() throws Exception{
         // given
-        loginDto = new LoginDto();
+        LoginDto loginDto = new LoginDto();
         loginDto.setId("20000101");
         loginDto.setPassword("password123");
 
+        LoginDto returnedDto = new LoginDto();
+        returnedDto.setId("20000101");
+        returnedDto.setPassword("password123");
+        returnedDto.setStudentId(1L);
+
         // when
         Mockito.when(loginService.loginStudent(any(LoginDto.class), any(MockHttpServletRequest.class)))
-                .thenReturn(loginDto);
+                .thenReturn(returnedDto);
 
         // then
         mockMvc.perform(post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(returnedDto)));
+
     }
 
     @Test
-    @DisplayName("400 테스트")
+    @DisplayName("학생 로그인 실패 테스트 - 없는 ID")
     public void badLogin() throws Exception {
         // given
         LoginDto loginDto = new LoginDto();
@@ -71,7 +76,26 @@ class ApiLoginControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("없는 ID 입니다. 다시 확인해주세요"));
+                .andExpect(jsonPath("$.message").value("없는 ID 입니다. 다시 확인해주세요"));
+    }
+
+    @Test
+    @DisplayName("학생 로그인 실패 테스트 - 비밀번호 불일치")
+    public void badLogin2() throws Exception {
+        // given
+        LoginDto loginDto = new LoginDto();
+        loginDto.setId("20000101");
+        loginDto.setPassword("wrongpassword");
+
+        Mockito.when(loginService.loginStudent(any(LoginDto.class), any(MockHttpServletRequest.class)))
+                .thenThrow(new LoginCustomException("비밀번호가 일치하지 않습니다."));
+
+        // when & then
+        mockMvc.perform(post("/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginDto)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("비밀번호가 일치하지 않습니다."));
     }
 
 

@@ -3,7 +3,7 @@ package Team.project.api.course;
 import Team.project.dto.login.LoginDto;
 import Team.project.entity.Course;
 import Team.project.exception.UnauthorizedException;
-import Team.project.service.course.CourseService;
+import Team.project.service.Course.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
