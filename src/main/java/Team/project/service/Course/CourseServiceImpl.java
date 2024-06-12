@@ -21,4 +21,10 @@ public class CourseServiceImpl implements CourseService{
     public List<CourseDto> findAllCourses() {
         return courseRepository.findAllCourses();
     }
+
+    // 에러방지용
+    @Override
+    public List<Course> findAllByProfessorId(Long professorId) {
+        return List.of();
+    }
 }
