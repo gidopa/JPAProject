@@ -37,8 +37,28 @@ public class Course {
     @Embedded
     private SemesterInfo semesterInfo;
 
+
     // 강의계획서 업로드를 위한 파일경로 칼럼
     private String filePath;
+=======
+
+    /* 연관관계 메서드 */
+    public void setProfessor(Professor professor){
+        this.professor = professor;
+        professor.getCourses().add(this);
+    }
+
+    /* 생성자 */
+    public Course(String courseName, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo) {
+        this.courseName = courseName;
+        this.midTermWeight = midTermWeight;
+        this.finalTermWeight = finalTermWeight;
+        this.reportWeight = reportWeight;
+        this.credit = credit;
+        this.category = category;
+        this.semesterInfo = semesterInfo;
+    }
+
 
     public Course(String courseName, Professor professor, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category) {
         this.courseName = courseName;
@@ -49,6 +69,7 @@ public class Course {
         this.credit = credit;
         this.category = category;
     }
+
 
     public Course(String courseName, Professor professor, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo, String filePath) {
         this.courseName = courseName;
@@ -61,5 +82,6 @@ public class Course {
         this.semesterInfo = semesterInfo;
         this.filePath = filePath;
     }
+
 }
 
