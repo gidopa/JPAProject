@@ -33,9 +33,9 @@ VALUES (1, 33330101, 'password123', 'pro', 'Cityville', '123 Main St', 1),
        (2, 33330102, 'password124', 'pro2', 'Cityville', '123 Main St', 1);
 
 -- Course 데이터 삽입
-insert into course (credit, mid_term_weight, final_term_weight, report_weight, course_id, professor_id, course_name)
-values ( 3,0.3,0.3,0.4, 1, 1,'JAVA'),
-       (3,0.4,0.4,0.2,2,2,'Python');
+INSERT INTO course (course_name, credit, mid_term_weight, final_term_weight, report_weight, professor_id, category, semester, years, file_path)
+VALUES ('JAVA', 3, 0.3, 0.3, 0.4, 1, 'MAJOR', 1, 2024, NULL),
+       ('Python', 3, 0.4, 0.4, 0.2, 2, 'MAJOR', 1, 2024, NULL);
 
 -- Enroll 데이터 삽입
 insert into enroll (course_id, student_id, grade_type)

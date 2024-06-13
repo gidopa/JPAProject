@@ -13,7 +13,7 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
     private Long id;
     private String courseName;
@@ -37,6 +37,9 @@ public class Course {
     @Embedded
     private SemesterInfo semesterInfo;
 
+    // 강의계획서 업로드를 위한 파일경로 칼럼
+    private String filePath;
+
     public Course(String courseName, Professor professor, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category) {
         this.courseName = courseName;
         this.professor = professor;
@@ -47,5 +50,16 @@ public class Course {
         this.category = category;
     }
 
+    public Course(String courseName, Professor professor, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo, String filePath) {
+        this.courseName = courseName;
+        this.professor = professor;
+        this.midTermWeight = midTermWeight;
+        this.finalTermWeight = finalTermWeight;
+        this.reportWeight = reportWeight;
+        this.credit = credit;
+        this.category = category;
+        this.semesterInfo = semesterInfo;
+        this.filePath = filePath;
+    }
 }
 
