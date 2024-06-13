@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: head"></head>
+<body>
+<div th:replace="common/nav :: nav"></div>
+<div class="container mt-5">
+    <h2>강의 등록</h2>
+    <form th:action="@{/web/professor/openCourse}" th:object="${course}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="courseName">강의명:</label>
+            <input type="text" id="courseName" th:field="*{courseName}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="midTermWeight">중간고사 가중치:</label>
+            <input type="number" step="0.01" id="midTermWeight" th:field="*{midTermWeight}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="finalTermWeight">기말고사 가중치:</label>
+            <input type="number" step="0.01" id="finalTermWeight" th:field="*{finalTermWeight}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="reportWeight">레포트 가중치:</label>
+            <input type="number" step="0.01" id="reportWeight" th:field="*{reportWeight}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="credit">학점:</label>
+            <input type="number" id="credit" th:field="*{credit}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="category">카테고리:</label>
+            <select id="category" th:field="*{category}" class="form-control">
+                <option th:each="category : ${T(Team.project.entity.Category).values()}"
+                        th:value="${category}"
+                        th:text="${category}">카테고리</option>
+            </select>
+        </div>
+        <!-- 연도에 맞게 조정 -->
+        <div class="form-group">
+            <label for="year">연도:</label>
+            <input type="number" id="year" th:field="*{year}" th:value="${currentYear}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="semester">학기:</label>
+            <select id="semester" th:field="*{semester}" class="form-control">
+                <option value="1">1학기</option>
+                <option value="2">2학기</option>
+            </select>
+        </div>
+        <!-- 강의 계획서 업로드 -->
+        <div class="form-group">
+            <label for="file">강의 계획서 업로드:</label>
+            <input type="file" id="file" name="file" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">등록</button>
+    </form>
+
+    <div th:if="${success != null}">
+        <div th:if="${success}">
+            <p class="text-success">강의가 성공적으로 등록되었습니다!</p>
+        </div>
+        <div th:if="${!success}">
+            <p class="text-danger">오류가 발생했습니다. 다시 시도해주세요.</p>
+        </div>
+    </div>
+
+
+<div th:replace="common/footer :: span"></div>
+</body>
+</html>
