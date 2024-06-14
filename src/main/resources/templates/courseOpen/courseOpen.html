@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/head :: head"></head>
+<head th:replace="common/head :: head">
+</head>
 <body>
 <div th:replace="common/nav :: nav"></div>
 <div class="container mt-5">
@@ -62,8 +63,9 @@
             <p class="text-danger">오류가 발생했습니다. 다시 시도해주세요.</p>
         </div>
     </div>
-
+</div>
 
 <div th:replace="common/footer :: span"></div>
+
 </body>
 </html>
