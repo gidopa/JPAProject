@@ -8,7 +8,7 @@ import Team.project.entity.Student;
 import Team.project.exception.SessionNotFoundException;
 import Team.project.exception.StudentRecordCustomException;
 import Team.project.repository.login.StudentLoginRepository;
-import Team.project.repository.studentRecord.StudentHistoryRepository;
+import Team.project.repository.studentRecord.StudentRecordRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class StudentRecordServiceImpl implements StudentRecordService {
 
-    private final StudentHistoryRepository studentHistoryRepository;
+    private final StudentRecordRepository studentRecordRepository;
     private final StudentLoginRepository studentLoginRepository;
 
     /* 학생 휴복학 조회 */
@@ -42,7 +42,7 @@ public class StudentRecordServiceImpl implements StudentRecordService {
         Student student = studentLoginRepository.findStudentById(id)
                 .orElseThrow(() -> new StudentRecordCustomException("회원이 존재하지 않습니다."));
 
-        return studentHistoryRepository.findStudentHistories(student);
+        return studentRecordRepository.findStudentHistories(student);
     }
 
     /* 학생 학점 조회 */
