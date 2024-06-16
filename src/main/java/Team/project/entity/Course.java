@@ -1,5 +1,6 @@
 package Team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -38,6 +39,8 @@ public class Course {
     @Embedded
     private SemesterInfo semesterInfo;
 
+    // 강의계획서 업로드를 위한 파일경로 칼럼
+    private String filePath;
 
     /* 연관관계 메서드 */
     public void setProfessor(Professor professor){
@@ -66,6 +69,17 @@ public class Course {
         this.category = category;
     }
 
+    public Course(String courseName, Professor professor, double midTermWeight, double finalTermWeight, double reportWeight, int credit, Category category, SemesterInfo semesterInfo, String filePath) {
+        this.courseName = courseName;
+        this.professor = professor;
+        this.midTermWeight = midTermWeight;
+        this.finalTermWeight = finalTermWeight;
+        this.reportWeight = reportWeight;
+        this.credit = credit;
+        this.category = category;
+        this.semesterInfo = semesterInfo;
+        this.filePath = filePath;
+    }
 
 }
 
