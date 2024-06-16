@@ -31,6 +31,8 @@
                 <th>학점</th>
                 <th>연도</th>
                 <th>학기</th>
+                <th>전공/교양</th>
+                <th>강의 계획표</th>
             </tr>
             </thead>
             <tbody>
@@ -41,6 +43,14 @@
                 <td th:text="${course.credit}"></td>
                 <td th:text="${course.year}"></td>
                 <td th:text="${course.semester}"></td>
+                <td>
+                    <span th:if="${course.category == 'MAJOR'}">전공</span>
+                    <span th:if="${course.category == 'GENERAL'}">교양</span>
+                </td>
+                <td>
+                    <a th:if="${course.filePath != null}" th:href="@{${course.filePath}}" download>다운로드</a>
+                    <span th:if="${course.filePath == null}">없음</span>
+                </td>
             </tr>
             </tbody>
         </table>

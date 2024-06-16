@@ -2,6 +2,7 @@ package Team.project.repository.Course;
 
 import Team.project.dto.course.CourseDto;
 import Team.project.dto.course.QCourseDto;
+import Team.project.entity.Category;
 import Team.project.entity.Course;
 import Team.project.entity.QCourse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -30,9 +31,12 @@ public class CourseRepositoryImpl implements CourseRepositoryCustom{
                         course.professor.name,
                         course.credit,
                         course.semesterInfo.semester,
-                        course.semesterInfo.years
-
-
+                        course.semesterInfo.years,
+                        course.midTermWeight,
+                        course.finalTermWeight,
+                        course.reportWeight,
+                        course.category.stringValue(),
+                        course.filePath
                 ))
                 .from(course)
                 .fetch();

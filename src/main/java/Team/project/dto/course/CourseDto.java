@@ -19,7 +19,7 @@ public class CourseDto {
     private String category;    // 전공 교양 여부
     private String filePath; // 파일 경로 필드 추가
 
-    @QueryProjection
+    /*@QueryProjection
     public CourseDto(Long courseId, String courseName, String professor, int credit, int semester, int year) {
         this.courseId = courseId;
         this.courseName = courseName;
@@ -27,9 +27,11 @@ public class CourseDto {
         this.credit = credit;
         this.semester = semester;
         this.year = year;
-    }
+    }*/
 
-    public CourseDto(String courseName, String professor, int credit, int semester, int year, double midTermWeight, double finalTermWeight, double reportWeight, String category, String filePath) {
+    @QueryProjection
+    public CourseDto(Long courseId, String courseName, String professor, int credit, int semester, int year, double midTermWeight, double finalTermWeight, double reportWeight, String category, String filePath) {
+        this.courseId = courseId;
         this.courseName = courseName;
         this.professor = professor;
         this.credit = credit;
