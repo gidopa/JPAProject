@@ -28,11 +28,8 @@ public class CourseOpenController {
 
     @GetMapping("/web/professor/courseOpen")
     public String showView(Model model) {
-        int currentYear = Year.now().getValue();
-        log.info("Current Year: {}", currentYear);
 
         model.addAttribute("course", new CourseDto());
-        model.addAttribute("currentYear", currentYear); // 학기정보 입력할 때 미리 입력된 현재 연도
         return "courseOpen/courseOpen";
     }
 
@@ -56,10 +53,7 @@ public class CourseOpenController {
             log.error("Error adding course: ", e);
             model.addAttribute("success", false);
         }
-        int currentYear = Year.now().getValue();
-        log.info("Current Year: {}", currentYear);
         model.addAttribute("course", new CourseDto()); // 다시 빈 폼으로 리셋
-        model.addAttribute("currentYear", currentYear); // 다시 현재 연도 설정
         return "courseOpen/courseOpen";
     }
 

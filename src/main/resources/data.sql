@@ -1,5 +1,5 @@
 -- Major 데이터 삽입
-INSERT INTO Major ( major_id, name) VALUES ( 2,'경영학과'), ( 1,'컴퓨터공학');
+INSERT INTO Major ( major_id, name) VALUES ( 2,'경영학과'), ( 1,'컴퓨터공학'), (3, '경제학과');
 
 -- Student 데이터 삽입
 INSERT INTO student (student_id, hakbun, name, password, major_id, city, street,  years, semester)
