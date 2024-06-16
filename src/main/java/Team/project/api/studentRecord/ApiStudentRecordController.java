@@ -11,6 +11,7 @@ import Team.project.service.studentRecord.StudentRecordService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class ApiStudentRecordController {
     private final InfoService infoService;
 
     @GetMapping("/student/record/{id}")
+    @Cacheable(value = "studentHistory", key = "#id")
     public ResponseEntity<?> studentRecord(@PathVariable Long id, HttpSession session){
         log.info("학생 학적표 조회 시도 중 - uri.id: {}", id);
         
