@@ -29,6 +29,8 @@
                 <th>강의명</th>
                 <th>교수님</th>
                 <th>학점</th>
+                <th>연도</th>
+                <th>학기</th>
             </tr>
             </thead>
             <tbody>
@@ -37,22 +39,22 @@
                 <td th:text="${course.courseName}"></td>
                 <td th:text="${course.professor}"></td>
                 <td th:text="${course.credit}"></td>
+                <td th:text="${course.year}"></td>
+                <td th:text="${course.semester}"></td>
             </tr>
             </tbody>
         </table>
     </div>
 
     <!-- 수강신청 결과 -->
-    <div th:if="${registrationResult != null}">
-        <div th:if="${registrationResult.success}">
-            <div class="alert alert-success mt-3">
-                <p th:text="${registrationResult.message}"></p>
-            </div>
+    <div th:if="${enrollmentResult != null}">
+        <div th:if="${enrollmentResult.contains('완료')}"
+             class="alert alert-success mt-3">
+            <p th:text="${enrollmentResult}"></p>
         </div>
-        <div th:if="${!registrationResult.success}">
-            <div class="alert alert-danger mt-3">
-                <p th:text="${registrationResult.message}"></p>
-            </div>
+        <div th:if="${enrollmentResult.contains('실패')}"
+             class="alert alert-danger mt-3">
+            <p th:text="${enrollmentResult}"></p>
         </div>
     </div>
 </div>

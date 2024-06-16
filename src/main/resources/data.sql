@@ -15,14 +15,14 @@ VALUES (1, 20000101, 'John Doe', 'password123', 1, 'Cityville', '123 Main St', 2
        (9, 20240110, 'student9', 'password125', 1, 'Cityville', '123 Main St',  2024, 2);
 
 -- StudentHistory 데이터 삽입
-INSERT INTO student_history (student_history_id, student_id, old_Status, new_Status, updated_date)
-VALUES (1, 1, 'ENROLLED', 'ENROLLED', '2023-01-01'),
-       (2, 2, 'ENROLLED', 'ENROLLED', '2023-01-02'),
-       (3, 3, 'ENROLLED', 'ENROLLED', '2023-01-03'),
-       (4, 4, 'ENROLLED', 'ENROLLED', '2023-01-04'),
-       (5, 5, 'ENROLLED', 'ENROLLED', '2023-01-05'),
-       (6, 6, 'ENROLLED', 'ONLEAVE', '2023-01-06'),
-       (7, 1, 'ENROLLED', 'ONLEAVE', '2023-02-01');
+/*INSERT INTO student_history (student_history_id, student_id, old_Status, new_Status)
+VALUES (1, 1, 'ENROLLED', 'ENROLLED'),
+       (2, 2, 'ENROLLED', 'ENROLLED'),
+       (3, 3, 'ENROLLED', 'ENROLLED'),
+       (4, 4, 'ENROLLED', 'ENROLLED'),
+       (5, 5, 'ENROLLED', 'ENROLLED'),
+       (6, 6, 'ENROLLED', 'ONLEAVE'),
+       (7, 1, 'ENROLLED', 'ONLEAVE');*/
 
 -- Credit 데이터 삽입
 INSERT INTO Credit (credit_id,student_id, credit) VALUES (1, 1,4.0), (2, 2,1.8), (3, 3,2.0);
@@ -33,23 +33,23 @@ VALUES (1, 33330101, 'password123', 'pro', 'Cityville', '123 Main St', 1),
        (2, 33330102, 'password124', 'pro2', 'Cityville', '123 Main St', 1);
 
 -- Course 데이터 삽입
-insert into course (credit, mid_term_weight, final_term_weight, report_weight, course_id, professor_id, course_name)
-values ( 3,0.3,0.3,0.4, 1, 1,'JAVA'),
-       (3,0.4,0.4,0.2,2,2,'Python');
+INSERT INTO course (course_name, credit, mid_term_weight, final_term_weight, report_weight, professor_id, category, semester, years, file_path)
+VALUES ('JAVA', 3, 0.3, 0.3, 0.4, 1, 'MAJOR', 1, 2024, NULL),
+       ('Python', 3, 0.4, 0.4, 0.2, 2, 'MAJOR', 1, 2024, NULL);
 
 -- Enroll 데이터 삽입
-insert into enroll (course_id, enroll_id, student_id, grade_type)
-values ( 1, 1,1, 'APLUS'),
-       ( 1, 2,2, 'BPLUS'),
-       ( 1, 3,3, 'AZERO'),
-       ( 1, 4,4, 'CPLUS'),
-       ( 1, 5,5, 'APLUS'),
-       ( 1, 6,6, 'APLUS'),
-       ( 1, 7,7, 'APLUS'),
-       ( 1, 8,8, 'APLUS'),
-       ( 1, 9,9, 'APLUS'),
-       ( 1, 10,10, 'APLUS'),
-       (2,11,1,'APLUS');
+insert into enroll (course_id, student_id, grade_type)
+values (1, 1, 'APLUS'),
+       (1, 2, 'BPLUS'),
+       (1, 3, 'AZERO'),
+       (1, 4, 'CPLUS'),
+       (1, 5, 'APLUS'),
+       (1, 6, 'APLUS'),
+       (1, 7, 'APLUS'),
+       (1, 8, 'APLUS'),
+       (1, 9, 'APLUS'),
+       (1, 10, 'APLUS'),
+       (2, 1, 'APLUS');
 
 insert into assessment (enroll_id, assessment_id, mid_term_score, final_term_score, report_score, total_score)
 values ( 1,1,90,90,90 ,270),

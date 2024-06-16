@@ -3,16 +3,21 @@ package Team.project.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter
+@ToString(of = {"student", "oldStatus", "newStatus", "updatedDate", "startDate", "reason"})
 public class StudentHistory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_history_id")
     private Long id;
 
@@ -28,8 +33,13 @@ public class StudentHistory {
     @Column(name = "new_status")
     private StudentStatus newStatus;
 
+    private String reason;
+    private LocalDate startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "updated_date")
     private LocalDate updatedDate;
+
 
     public StudentHistory(Student student, StudentStatus oldStatus, StudentStatus newStatus) {
         this.oldStatus = oldStatus;

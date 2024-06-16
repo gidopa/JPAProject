@@ -2,7 +2,7 @@ package Team.project.repository.Assessment;
 
 import Team.project.dto.grade.GradeEditDto;
 import Team.project.entity.Course;
-import Team.project.repository.course.CourseRepository;
+import Team.project.repository.Course.CourseRepository;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
