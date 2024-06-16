@@ -13,11 +13,11 @@ import static Team.project.entity.QStudent.student;
 import static Team.project.entity.QStudentHistory.studentHistory;
 
 @Repository
-public class StudentHistoryRepositoryImpl implements StudentHistoryRepositoryCustom {
+public class StudentRecordRepositoryImpl implements StudentRecordRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-    public StudentHistoryRepositoryImpl(EntityManager em) {
+    public StudentRecordRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
