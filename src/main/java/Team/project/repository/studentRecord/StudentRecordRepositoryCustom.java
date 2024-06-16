@@ -5,7 +5,7 @@ import Team.project.entity.Student;
 
 import java.util.List;
 
-public interface StudentHistoryRepositoryCustom {
+public interface StudentRecordRepositoryCustom {
 
     List<StudentHistoryDto> findStudentHistories(Student entity);
 }
