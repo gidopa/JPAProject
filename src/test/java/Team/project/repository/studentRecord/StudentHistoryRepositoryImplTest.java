@@ -20,7 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 class StudentHistoryRepositoryImplTest {
 
-    @Autowired StudentHistoryRepository studentHistoryRepository;
+    @Autowired
+    StudentRecordRepository studentRecordRepository;
     @Autowired StudentLoginRepository studentLoginRepository;
 
     @Test
@@ -32,7 +33,7 @@ class StudentHistoryRepositoryImplTest {
         
         // when
         Student student = studentLoginRepository.findById(id).orElse(null);
-        List<StudentHistoryDto> studentHistories = studentHistoryRepository.findStudentHistories(student);
+        List<StudentHistoryDto> studentHistories = studentRecordRepository.findStudentHistories(student);
 
         // then
         assertThat(studentHistories.size()).isEqualTo(2);
