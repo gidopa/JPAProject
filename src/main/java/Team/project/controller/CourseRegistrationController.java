@@ -24,7 +24,7 @@ public class CourseRegistrationController {
     private final CourseService courseService;
 
     // 강의목록 보이기
-    @GetMapping("/courseRegistration")
+    @GetMapping("/web/courseRegistration")
     public String courseRegistration(Model model) {
 
         List<CourseDto> courses = courseService.findAllCourses();
@@ -34,7 +34,7 @@ public class CourseRegistrationController {
     }
 
     // 수강신청
-    @PostMapping("/courseRegistration/register")
+    @PostMapping("/web/courseRegistration/register")
     public String registerCourse(@RequestParam Long hakbun, @RequestParam Long courseId, Model model, RedirectAttributes redirectAttributes) {
         try {
             Enroll enroll = courseRegistrationService.registerCourse(hakbun, courseId);
@@ -45,7 +45,7 @@ public class CourseRegistrationController {
             log.error("CourseRegistrationController : {}", e.getMessage());
             redirectAttributes.addFlashAttribute("enrollmentResult", "수강신청 실패 : " + e.getMessage());
         }
-        return "redirect:/courseRegistration";
+        return "redirect:/web/courseRegistration";
     }
 }
 
